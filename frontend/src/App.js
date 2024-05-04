@@ -21,6 +21,86 @@ function App() {
     </div>
   );
 }
+// maybe add split between random numbers but not right now 
+function Roulette_inside(bet,amount) {
+let result = getRandom(38);
+ for (let i=0; i<bet.length; i++ ) {
+  if(bet[i]==result) {
+    if (bet.length==1) {
+      return amount*35;
+    }
+    if (bet.length==2) {
+      return amount*17;
+    }
+    if (bet.length==3) {
+      return amount*11;
+    }
+    if (bet.length==4) {
+      return amount*8;
+    }
+ }
+}
+ return 0; 
+}
+//1:first third 
+//2: second third
+//3: third third 
+// b: first half 
+// f: second half
+// r:red 
+//b:black
+// o:odd
+//e:even 
+function Roulette_outside(bet,amount) {
+  const red = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
+  const black = [2,4,6,8,10,11,15,17,20,22,24,26,28,29,31,33,35];
+  let result = getRandom(38);
+  if (bet=='1') {
+    if (result<13 && result>0) {
+      return true;
+    }
+  }
+  if (bet=='2') {
+    if (result<25 && result>12) {
+      return amount*3;
+    }
+  }
+  if (bet=='3') {
+    if (result<37 && result>24) {
+      return amount*3;
+    }
+  }
+  if (bet=='b') {
+    if (result<25 && result>0) {
+      return amount*2;
+    }
+  }
+  if (bet=='f') {
+    if (result<37 && result>24) {
+      return amount*2;
+    }
+  }
+  if (bet=='r') {
+    if (red.includes(result)) {
+      return amount*2;
+    }
+  }
+  if (bet=='b') {
+    if (black.includes(result)) {
+      return amount*2;
+    }
+  }
+  if (bet=='o') {
+    if (result!=37 && result%2==1) {
+      return amount*2;
+    }
+  }
+  if (bet=='e') {
+    if (result!=0 && result%2==0) {
+      return amount*2;
+    }
+  }
+}
 function RunSlot1() {
   const slot = [0,0,0,0]; 
   let symbols = slot(slot);
