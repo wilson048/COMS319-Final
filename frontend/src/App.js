@@ -22,4 +22,13 @@ function App() {
   );
 }
 
+function getRandom (top) {
+  let rand=Math.floor(Math.random() *top);
+  return rand; 
+}
+
+function slot1() {
+
+}
+
 export default App;
