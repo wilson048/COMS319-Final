@@ -22,7 +22,15 @@ function App() {
   );
 }
 // maybe add split between random numbers but not right now 
-function Roulette_inside(bet,amount) {
+
+/**
+ * This check if the result hit the bet and returns the amount won for inside bets 
+ * @param {*} bet this is the number or numbers of the bet in an array of ints
+ * @param {*} amount this is the amount bet on that particular 
+ * @param {*} result this is the number of the result the wheel hit
+ * @returns the amount that the person won, 0 if not won 
+ */
+function Roulette_inside(bet,amount,result) {
 let result = getRandom(38);
  for (let i=0; i<bet.length; i++ ) {
   if(bet[i]==result) {
@@ -51,10 +59,20 @@ let result = getRandom(38);
 //b:black
 // o:odd
 //e:even 
-function Roulette_outside(bet,amount) {
+
+/**
+ * This check if the result hit the bet and returns the amount won for outside bets 
+ * 
+ * 
+ * @param {*} bet the type of bet in a char
+ * @param {*} amount the amount of coins bet int
+ * @param {*} result the int of the number the wheel hit 
+ * @returns the amount won
+ */
+function Roulette_outside(bet,amount,result) {
   const red = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
   const black = [2,4,6,8,10,11,15,17,20,22,24,26,28,29,31,33,35];
-  let result = getRandom(38);
+  //let result = getRandom(38);
   if (bet=='1') {
     if (result<13 && result>0) {
       return true;
@@ -101,23 +119,41 @@ function Roulette_outside(bet,amount) {
     }
   }
 }
+
+/**
+ * 
+ * @returns this function returns how much was won after spinning lot one
+ */
 function RunSlot1() {
   const slot = [0,0,0,0]; 
   let symbols = slot(slot);
   let reward = Winner1(symbols);
   return reward; 
 }
+/**
+ * 
+ * @returns this function returns how much was won after spinning lot two
+ */
 function RunSlot2() {
   const slot = [0,0]
   let symbols = slot(slot); 
   let reward = Winner2(symbols);
   return reward; 
 }
+/**
+ * used for different results to get a random number 
+ * @param {*} top the max for the random function 
+ * @returns the random result 
+ */
 function getRandom (top) {
   let rand=Math.floor(Math.random() *top);
   return rand; 
 }
-
+/**
+ * This makes the numbers for the slot machine
+ * @param {*} slots the array of a size that is the number of slots in the machine
+ * @returns an array of symbols that are the results 
+ */
 function slot(slots) {
 for (let i=0; i<slots.length; i++) {
     slots[i]= getRandom(10);
@@ -125,6 +161,22 @@ for (let i=0; i<slots.length; i++) {
 let symbols = slotToChar(slot);
 return symbols; 
 } 
+/**
+ * cherry:h 
+ * lemon:l
+ * orange:o
+ * bell:e
+ * grape:g
+ * corn:c
+ * bar:b
+ * spade:s
+ * watermelon:w
+ * 7:7
+ * 
+ * This takes the numbers from slots and turns in into letters 
+ * @param {*} slots this is the number array of the results
+ */
+
  function slotToChar(slots) {
 for (let i=0; i<slots.length; i++) {
   if (slots[i]==0) {
@@ -159,6 +211,11 @@ for (let i=0; i<slots.length; i++) {
   }
 }
  }
+ /**
+  * This is for 2 row slots 
+  * @param {*} symbols the symbols that are the reults
+  * @returns the amount earned 
+  */
 function Winner2(symbols) {
   if (symbols[0]=='l'&& symbols[1] == 'l') return 0;
   if (symbols[0]=='7'&& symbols[1] == '7') return 50;
@@ -170,6 +227,11 @@ function Winner2(symbols) {
   if (symbols[1]=='g'|| symbols[0]=='g') return 2; 
   return 0;
 }
+/**
+ * This is for 4 row slots
+  * @param {*} symbols the symbols that are the reults
+  * @returns the amount earned  
+ */
  function Winner1(symbols) {
 if (symbols[1]=='7' && symbols[2]=='7' && symbols[0]=='7' && symbols[3]=='7') { 
   return 20000;
