@@ -21,19 +21,30 @@ function App() {
     </div>
   );
 }
-
+function RunSlot1() {
+  const slot = [0,0,0,0]; 
+  let symbols = slot(slot);
+  let reward = Winner1(symbols);
+  return reward; 
+}
+function RunSlot2() {
+  const slot = [0,0]
+  let symbols = slot(slot); 
+  let reward = Winner2(symbols);
+  return reward; 
+}
 function getRandom (top) {
   let rand=Math.floor(Math.random() *top);
   return rand; 
 }
 
-function slot() {
-const slots = [0,0,0,0];
-const symbols = []
+function slot(slots) {
 for (let i=0; i<slots.length; i++) {
     slots[i]= getRandom(10);
-} 
 }
+let symbols = slotToChar(slot);
+return symbols; 
+} 
  function slotToChar(slots) {
 for (let i=0; i<slots.length; i++) {
   if (slots[i]==0) {
@@ -68,7 +79,18 @@ for (let i=0; i<slots.length; i++) {
   }
 }
  }
- function Winner(symbols) {
+function Winner2(symbols) {
+  if (symbols[0]=='l'&& symbols[1] == 'l') return 0;
+  if (symbols[0]=='7'&& symbols[1] == '7') return 50;
+  if (symbols[0]=='w'&& symbols[1] == 'w') return 35;
+  if (symbols[0]=='s'&& symbols[1] == 's') return 25;
+  if (symbols[0]=='c'&& symbols[1] == 'c') return 15;
+  if (symbols[0]==symbols[1]) return 5;
+  if (symbols[1]=='h'|| symbols[0]=='h') return 3; 
+  if (symbols[1]=='g'|| symbols[0]=='g') return 2; 
+  return 0;
+}
+ function Winner1(symbols) {
 if (symbols[1]=='7' && symbols[2]=='7' && symbols[0]=='7' && symbols[3]=='7') { 
   return 20000;
 }
@@ -186,6 +208,7 @@ if (symbols[1]=='h' && symbols[2]=='h') {
 if (symbols[0]='h') {
   return 2; 
 }
+return 0; 
 }
 
 export default App;
