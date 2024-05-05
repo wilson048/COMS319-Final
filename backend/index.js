@@ -17,25 +17,28 @@ const client = new MongoClient(url);
 const db = client.db(dbName);
 
 app.get("/verifyAccount", async (req, res) => {
+  const accountID = req.params._id;
   await client.connect();
   console.log("Node connected successfully to GET MongoDB");
-  const query = {};
-  const results = await db
-    .collection("anti_gambling_accounts")
-    .find(query)
-    .limit(100)
-    .toArray();
-  console.log(results);
+  const query = { id: accountID };
+  const results = await db.collection("anti_gambling_accounts").findOne(query);
+  if (!results) res.send("Not Found").status(404);
+  if (req.body.password != results.body.password) {
+    res.status(404);
+    res.send("Password Incorrect");
+    return;
+  }
   res.status(200);
+  console.log(results);
   res.send(results);
 });
 
-app.get("/:id", async (req, res) => {
-  const Productid = Number(req.params.id);
-  console.log("Product to find :", Productid);
+app.get("/:findAccount", async (req, res) => {
+  const accountID = req.params._id;
+  console.log("Account to find :", accountID);
   await client.connect();
   console.log("Node connected successfully to GET-id MongoDB");
-  const query = { id: Productid };
+  const query = { _id: accountID };
   const results = await db.collection("anti_gambling_accounts").findOne(query);
   console.log("Results :", results);
   if (!results) res.send("Not Found").status(404);
@@ -71,10 +74,10 @@ app.post("/addAccount", async (req, res) => {
 
 app.delete("/deleteAccount/:username", async (req, res) => {
   try {
-    const id = Number(req.params.id);
+    const id = req.params.username;
     await client.connect();
     console.log("Product to delete :", id);
-    const query = { id: id };
+    const query = { _id: id };
     // delete
     const results = await db
       .collection("anti_gambling_accounts")
@@ -88,8 +91,8 @@ app.delete("/deleteAccount/:username", async (req, res) => {
 });
 
 app.put("/updateAccount/:username", async (req, res) => {
-  const id = Number(req.params.id);
-  const query = { id: id };
+  const id = req.params._id;
+  const query = { _id: id };
   await client.connect();
   console.log("Product to Update :", id);
   // Data for updating the document, typically comes from the request body
