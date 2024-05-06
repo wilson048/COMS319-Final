@@ -33,16 +33,20 @@ app.get("/verifyAccount", async (req, res) => {
   res.send(results);
 });
 
-app.get("/:findAccount", async (req, res) => {
-  const accountID = req.params._id;
+app.post("/findAccount/:username", async (req, res) => {
+  const accountID = req.params.username;
+  const accountPassword = req.body.password;
   console.log("Account to find :", accountID);
   await client.connect();
-  console.log("Node connected successfully to GET-id MongoDB");
+  console.log("Node connected successfully to POST-id MongoDB");
+  console.log(accountID);
   const query = { _id: accountID };
   const results = await db.collection("anti_gambling_accounts").findOne(query);
   console.log("Results :", results);
   if (!results) res.send("Not Found").status(404);
-  else res.send(results).status(200);
+  if (accountPassword != results.password) {
+    res.send("Wrong Password").status(400);
+  } else res.send(results).status(200);
 });
 
 app.post("/addAccount", async (req, res) => {
@@ -76,7 +80,7 @@ app.delete("/deleteAccount/:username", async (req, res) => {
   try {
     const id = req.params.username;
     await client.connect();
-    console.log("Product to delete :", id);
+    console.log("User to delete :", id);
     const query = { _id: id };
     // delete
     const results = await db
@@ -99,13 +103,14 @@ app.put("/updateAccount/:username", async (req, res) => {
   console.log(req.body);
   const updateData = {
     $set: {
-      id: req.body.name, // also "id": req.body.id,
-      title: req.body.title, // also "name": req.body.name,
-      price: req.body.price, // also "price": req.body.price,
-      description: req.body.description, // also "description": req.body.description,
-      category: req.body.category,
-      image: req.body.image,
-      rating: req.body.rating,
+      _id: req.body._id, // also "id": req.body.id,
+      password: req.body.password, // also "name": req.body.name,
+      dob: req.body.dob, // also "price": req.body.price,
+      coins: req.body.coins, // all fresh accounts start with 500 coins
+      credit_card_num: req.body.credit_card_num, // credit card information is not initally saved
+      credit_card_name: req.body.credit_card_name,
+      credit_card_zip: req.body.credit_card_zip,
+      credit_card_cvv: req.body.credit_card_cvv,
     },
   };
   // Add options if needed, for example { upsert: true } to create a document if it doesn't exist

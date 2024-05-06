@@ -1,4 +1,93 @@
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import "bootstrap/dist/css/bootstrap.css";
+
 function Login() {
+  function addNewAccount() {
+    // Fetch the value from the input field
+
+    let _id = document.getElementById("newUsername").value;
+    let password = document.getElementById("newPassword").value;
+    let dob = document.getElementById("newDOB").value;
+
+    if (
+      (_id == null || _id == "") &&
+      (password == null || password == "") &&
+      (dob == null || dob == "")
+    ) {
+      alert("Fill all text fields correctly (Username, Password, DOB)");
+      return;
+    }
+
+    console.log(_id);
+    fetch(`http://localhost:8081/addAccount`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        _id: _id,
+        password: password,
+        dob: dob,
+      }),
+    })
+      .then((response) => response.json())
+      .then((addThisProduct) => {
+        alert(
+          "Sucuessfully created account! Your balance will start at 500 coins"
+        );
+      });
+  }
+
+  function findAccount() {
+    // Fetch the value from the input field
+
+    let _id = document.getElementById("newUsername").value;
+    let password = document.getElementById("newPassword").value;
+
+    if ((_id == null || _id == "") && (password == null || password == "")) {
+      alert("Fill all text fields correctly (Username, Password)");
+      return;
+    }
+
+    console.log(_id);
+    fetch(`http://localhost:8081/findAccount/${_id}`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        _id: _id,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((addThisProduct) => {
+        alert("Signed In! Your balance is " + addThisProduct.coins);
+      });
+  }
+
+  function deleteAccount() {
+    // Fetch the value from the input field
+
+    let _id = document.getElementById("newUsername").value;
+    let password = document.getElementById("newPassword").value;
+
+    if ((_id == null || _id == "") && (password == null || password == "")) {
+      alert("Fill all text fields correctly (Username, Password)");
+      return;
+    }
+
+    console.log(_id);
+    fetch(`http://localhost:8081/deleteAccount/${_id}`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        _id: _id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((addThisProduct) => {
+        alert("Deleted Account!");
+      });
+  }
+
   return (
     <div class="container">
       <div class="col-md-7 col-lg-8">
@@ -6,13 +95,13 @@ function Login() {
 
         <div class="row g-3">
           <div class="col-sm-6">
-            <label for="newID" class="form-label">
-              ID
+            <label for="newUsername" class="form-label">
+              Username
             </label>
             <input
               type="text"
               class="form-control"
-              id="newID"
+              id="newUsername"
               placeholder=""
               required
             ></input>
@@ -20,13 +109,13 @@ function Login() {
           </div>
 
           <div class="col-sm-6">
-            <label for="newTitle" class="form-label">
-              Title
+            <label for="newPassword" class="form-label">
+              Password
             </label>
             <input
-              type="text"
+              type="password"
               class="form-control"
-              id="newTitle"
+              id="newPassword"
               placeholder=""
               required
             ></input>
@@ -34,87 +123,19 @@ function Login() {
           </div>
 
           <div class="col-12">
-            <label for="newPrice" class="form-label">
-              Price
+            <label for="newDOB" class="form-label">
+              Date of Birth
             </label>
             <div class="input-group has-validation">
               <input
                 type="text"
                 class="form-control"
-                id="newPrice"
+                id="newDOB"
                 placeholder=""
                 required
               ></input>
               <div class="invalid-feedback">Your price is required.</div>
             </div>
-          </div>
-
-          <div class="col-12">
-            <label for="newDescription" class="form-label">
-              Description
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="newDescription"
-              placeholder=""
-              required
-            ></input>
-            <div class="invalid-feedback">
-              Please enter a valid Description address for shipping updates.
-            </div>
-          </div>
-
-          <div class="col-12">
-            <label for="newCategory" class="form-label">
-              Category
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="newCategory"
-              placeholder=""
-              required
-            ></input>
-            <div class="invalid-feedback">Please enter your Category.</div>
-          </div>
-          <div class="col-12">
-            <label for="newImage" class="form-label">
-              Image URL
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="newImage"
-              placeholder=""
-              required
-            ></input>
-            <div class="invalid-feedback">Please enter your Image URL.</div>
-          </div>
-          <div class="col-12">
-            <label for="newRate" class="form-label">
-              Rate
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="newRate"
-              placeholder=""
-              required
-            ></input>
-          </div>
-
-          <div class="col-12">
-            <label for="newCount" class="form-label">
-              Count
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="newCount"
-              placeholder=""
-              required
-            ></input>
           </div>
         </div>
 
@@ -122,9 +143,16 @@ function Login() {
 
         <button
           class="w-100 btn btn-primary btn-lg"
-          onClick={() => addOneProduct()}
+          onClick={() => addNewAccount()}
         >
-          Add to MongoDB
+          Create Account
+        </button>
+
+        <button
+          class="w-100 btn btn-primary btn-lg"
+          onClick={() => findAccount()}
+        >
+          Sign In
         </button>
       </div>
     </div>
