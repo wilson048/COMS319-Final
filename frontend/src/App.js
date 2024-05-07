@@ -11,6 +11,17 @@ import {
 } from "react-router-dom";
 import Shop from "./Shop";
 
+const accountDetails = {
+  _id: "",
+  password: "",
+  dob: "",
+  coins: 0,
+  credit_card_num: "",
+  credit_card_name: "",
+  credit_card_zip: "",
+  credit_card_cvv: "",
+};
+
 function App() {
   const [viewer, setViewer] = useState(0);
   const staticViewer = viewer;
@@ -44,7 +55,7 @@ function App() {
           </button>
 
           <div class="collapse navbar-collapse" id="navbarsExample02">
-            <ul class="navbar-nav me-auto">
+            {/* <ul class="navbar-nav me-auto">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">
                   Home
@@ -55,10 +66,10 @@ function App() {
                   Link
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            <button class="btn btn-primary">Button</button>
+            {/* <button class="btn btn-primary">Button</button> */}
           </div>
         </div>
       </nav>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.css";
+import accountDetails from "./SessionToken";
+
 import {
   BrowserRouter as Router,
   Route,
@@ -44,33 +46,33 @@ function Shop() {
       });
   }
 
-  function findAccount() {
-    // Fetch the value from the input field
+  // function findAccount() {
+  //   // Fetch the value from the input field
 
-    let _id = document.getElementById("newUsername").value;
-    let password = document.getElementById("newPassword").value;
+  //   let _id = document.getElementById("newUsername").value;
+  //   let password = document.getElementById("newPassword").value;
 
-    if ((_id == null || _id == "") && (password == null || password == "")) {
-      alert("Fill all text fields correctly (Username, Password)");
-      return;
-    }
+  //   if ((_id == null || _id == "") && (password == null || password == "")) {
+  //     alert("Fill all text fields correctly (Username, Password)");
+  //     return;
+  //   }
 
-    console.log(_id);
-    fetch(`http://localhost:8081/verifyAccount/${_id}`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        _id: _id,
-        password: password,
-      }),
-    }).then((response) => {
-      if (response.status == 400 || response.status == 404) {
-        alert("Account not found or Wrong Password");
-        return;
-      }
-      alert("Signed In! Your balance is " + response.json().coins);
-    });
-  }
+  //   console.log(_id);
+  //   fetch(`http://localhost:8081/verifyAccount/${_id}`, {
+  //     method: "POST",
+  //     // headers: { "content-type": "application/json" },
+  //     body: JSON.stringify({
+  //       _id: _id,
+  //       password: password,
+  //     }),
+  //   }).then((response) => {
+  //     if (response.status == 400 || response.status == 404) {
+  //       alert("Account not found or Wrong Password");
+  //       return;
+  //     }
+  //     alert("Signed In! Your balance is " + response.json().coins);
+  //   });
+  // }
 
   // function updateAccount() {
   //   let _id = document.getElementById("newUsername").value;
@@ -103,27 +105,25 @@ function Shop() {
   //   });
   // }
 
-  // function getAccountData(data, coins) {
-  //   let values = Object.values(data);
-  //   console.log(data);
-  //   fetch(`http://localhost:8081/updateAccount/${data[0]}`, {
-  //     method: "PUT",
-  //     body: JSON.stringify({
-  //       _id: values[0], // also "id": req.body.id,
-  //       password: values[1], // also "name": req.body.name,
-  //       dob: values[2], // also "price": req.body.price,
-  //       coins: coins, // all fresh accounts start with 500 coins
-  //       credit_card_num: values[4], // credit card information is not initally saved
-  //       credit_card_name: values[5],
-  //       credit_card_zip: values[6],
-  //       credit_card_cvv: values[7],
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((updateThisAccount) => {
-  //       alert("Updated Account! Balance is now " + updateThisAccount.coins);
-  //     });
-  // }
+  function updateAccount(_id, coins) {
+    fetch(`http://localhost:8081/updateAccount/${_id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        _id: accountDetails._id, // also "id": req.body.id,
+        password: accountDetails.password, // also "name": req.body.name,
+        dob: accountDetails.dob, // also "price": req.body.price,
+        coins: coins, // all fresh accounts start with 500 coins
+        credit_card_num: accountDetails.credit_card_num, // credit card information is not initally saved
+        credit_card_name: accountDetails.credit_card_name,
+        credit_card_zip: accountDetails.credit_card_zip,
+        credit_card_cvv: accountDetails.credit_card_cvv,
+      }),
+    })
+      .then((response) => response.json())
+      .then((updateThisAccount) => {
+        alert("Updated Account! Balance is now " + updateThisAccount.coins);
+      });
+  }
 
   // function deleteAccount() {
   //   // Fetch the value from the input field

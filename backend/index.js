@@ -44,7 +44,7 @@ app.post("/verifyAccount/:username", async (req, res) => {
     res.status(400).send("Wrong Password");
     console.log(400);
   } else {
-    res.status(200).send(results);
+    res.send(results).status(200);
     console.log(200);
   }
 });
@@ -72,7 +72,7 @@ app.post("/addAccount", async (req, res) => {
     res.send(results);
   } catch (error) {
     console.error("An error occurred:", error);
-    res.status(500).send({ error: "An internal server error occurred" });
+    res.send({ error: "An internal server error occurred" }).status(500);
   }
 });
 
@@ -90,7 +90,7 @@ app.delete("/deleteAccount/:username", async (req, res) => {
     res.send(results);
   } catch (error) {
     console.error("Error deleting product:", error);
-    res.status(500).send({ message: "Internal Server Error" });
+    res.send({ message: "Internal Server Error" }).status(500);
   }
 });
 
