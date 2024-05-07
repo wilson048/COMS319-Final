@@ -16,37 +16,37 @@ const dbName = "reactdata";
 const client = new MongoClient(url);
 const db = client.db(dbName);
 
-app.get("/verifyAccount", async (req, res) => {
-  const accountID = req.params._id;
+app.get("/findAccount/:username", async (req, res) => {
+  const accountID = req.params.username;
   await client.connect();
   console.log("Node connected successfully to GET MongoDB");
-  const query = { id: accountID };
+  const query = { _id: accountID };
   const results = await db.collection("anti_gambling_accounts").findOne(query);
-  if (!results) res.send("Not Found").status(404);
-  if (req.body.password != results.body.password) {
-    res.status(404);
-    res.send("Password Incorrect");
-    return;
-  }
+  if (!results) res.status(404);
   res.status(200);
   console.log(results);
   res.send(results);
 });
 
-app.post("/findAccount/:username", async (req, res) => {
+app.post("/verifyAccount/:username", async (req, res) => {
   const accountID = req.params.username;
   const accountPassword = req.body.password;
   console.log("Account to find :", accountID);
   await client.connect();
   console.log("Node connected successfully to POST-id MongoDB");
-  console.log(accountID);
   const query = { _id: accountID };
   const results = await db.collection("anti_gambling_accounts").findOne(query);
   console.log("Results :", results);
-  if (!results) res.send("Not Found").status(404);
-  if (accountPassword != results.password) {
-    res.send("Wrong Password").status(400);
-  } else res.send(results).status(200);
+  // console.log(accountPassword);
+  // console.log(results.password);
+  if (!results || results == null) res.status(404).send("Not Found");
+  else if (accountPassword != results.password) {
+    res.status(400).send("Wrong Password");
+    console.log(400);
+  } else {
+    res.status(200).send(results);
+    console.log(200);
+  }
 });
 
 app.post("/addAccount", async (req, res) => {
@@ -95,7 +95,7 @@ app.delete("/deleteAccount/:username", async (req, res) => {
 });
 
 app.put("/updateAccount/:username", async (req, res) => {
-  const id = req.params._id;
+  const id = req.params.username;
   const query = { _id: id };
   await client.connect();
   console.log("Product to Update :", id);
