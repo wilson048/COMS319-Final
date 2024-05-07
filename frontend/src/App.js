@@ -9,6 +9,8 @@ import {
   Routes,
   useNavigate,
 } from "react-router-dom";
+import Shop from "./Shop";
+
 function App() {
   const [viewer, setViewer] = useState(0);
   const staticViewer = viewer;
@@ -64,6 +66,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/shop" element={<Shop />} />
         </Routes>
       </Router>
       {/* viewer === 1 && <Login></Login> */}
