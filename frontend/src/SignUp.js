@@ -181,6 +181,22 @@ function Login() {
               ></input>
               <div class="invalid-feedback">Valid Title is required.</div>
             </div>
+
+            <div class="col-sm-6">
+              <label for="newDOB" class="form-label">
+                Date of Birth
+              </label>
+              <div class="input-group has-validation">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newDOB"
+                  placeholder=""
+                  required
+                ></input>
+                <div class="invalid-feedback">Your price is required.</div>
+              </div>
+            </div>
           </div>
 
           {/* <hr class="my-4"></hr>
@@ -196,15 +212,15 @@ function Login() {
           <div class="col-md-7 col-lg-8 d-flex gap-2 justify-content-center py-5">
             <button
               class="w-50 btn btn-success btn-lg"
-              onClick={() => findAccount()}
-            >
-              Log In
-            </button>
-            <button
-              class="w-50 btn btn-primary btn-lg"
-              onClick={() => navigate("/signup")}
+              onClick={() => addNewAccount()}
             >
               Sign Up
+            </button>
+            <button
+              class="w-50 btn btn-danger btn-lg"
+              onClick={() => navigate("/")}
+            >
+              Back to Login
             </button>
           </div>
         </div>
