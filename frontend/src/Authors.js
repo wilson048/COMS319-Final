@@ -88,13 +88,12 @@ function Authors() {
             <span class="text-body-secondary">Assignment 3</span>
           </h2>
           <p class="lead">
-            This website consists of 4 different views. The first view simply
-            displays all products from MongoDB. The second view consists of a
-            form in order to add a new product to MongoDB. The third view
-            consits of the first view's items along with a an option to update a
-            item's price indivdually to MongoDB. The last view consits of the
-            first view's items along with corresponding delete buttons in order
-            to delete an item from MongoDB.
+            This website consists of two different forms of games commonly seen
+            inside of casinos. These game are roulette and slots, which are
+            games of pure chance. An account must first be created in order to
+            start using coins and playing games. A user starts with 1500 coins
+            when they make an account and can reload on coins whenever they run
+            out after they fill in their card details.
           </p>
         </div>
       </div>

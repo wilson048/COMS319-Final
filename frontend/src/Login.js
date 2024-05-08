@@ -247,6 +247,18 @@ function Login() {
         >
           Update Coins
         </button> */}
+        <footer class="footer mt-auto py-3 bg-body-tertiary">
+          <div class="container">
+            <span class="text-body-secondary">
+              Website by Wilson Chu and Anton Kordick
+            </span>
+            <div></div>
+
+            <button class="btn btn-secondary" onClick={navigate("/authors")}>
+              Authors
+            </button>
+          </div>
+        </footer>
       </div>
     </div>
   );

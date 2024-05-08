@@ -58,7 +58,7 @@ app.post("/addAccount", async (req, res) => {
       _id: values[0], // also "id": req.body.id,
       password: values[1], // also "name": req.body.name,
       dob: values[2], // also "price": req.body.price,
-      coins: 500, // all fresh accounts start with 500 coins
+      coins: 1500, // all fresh accounts start with 500 coins
       credit_card_num: "", // credit card information is not initally saved
       credit_card_name: "",
       credit_card_zip: "",

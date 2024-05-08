@@ -125,7 +125,7 @@ function App() {
             Website by Wilson Chu and Anton Kordick
           </span>
           <div></div>
-          <Routes>
+          {/* <Routes>
             <Route
               path="/"
               element={
@@ -137,7 +137,7 @@ function App() {
                 </button>
               }
             ></Route>
-          </Routes>
+          </Routes> */}
         </div>
       </footer>
     </div>
