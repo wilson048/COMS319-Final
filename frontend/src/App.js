@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Authors from "./Authors";
+import Slot2 from "./Slot2";
 
 import {
   BrowserRouter as Router,
@@ -14,6 +15,7 @@ import {
 } from "react-router-dom";
 import Shop from "./Shop";
 import Slot4 from "./Slot4";
+import Roulette from "./Roulette";
 
 const accountDetails = {
   _id: "",
@@ -113,6 +115,8 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/authors" element={<Authors />} />
         <Route path="/Slot4" element={<Slot4 />} />
+        <Route path="/Slot2" element={<Slot2 />} />
+        <Route path="/Roulette" element={<Roulette />} />
       </Routes>
       {/* viewer === 1 && <Login></Login> */}
       <footer class="footer mt-auto py-3 bg-body-tertiary">

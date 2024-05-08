@@ -221,6 +221,18 @@ function Login() {
             >
               Slot-4
             </button>
+            <button
+              class="w-50 btn btn-primary btn-lg"
+              onClick={() => navigate("/Slot2")}
+            >
+              Slot-2
+            </button>
+            <button
+              class="w-50 btn btn-primary btn-lg"
+              onClick={() => navigate("/Roulette")}
+            >
+              Roulette
+            </button>
           </div>
         </div>
         {/* <button
