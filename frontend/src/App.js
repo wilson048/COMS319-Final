@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Authors from "./Authors";
+import Slot2 from "./Slot2";
 
 import {
   BrowserRouter as Router,
