@@ -1,105 +1,20 @@
 //maybe add split between random numbers but not right now
 
-/**
- * This check if the result hit the bet and returns the amount won for inside bets
- * @param {*} bet this is the number or numbers of the bet in an array of ints
- * @param {*} amount this is the amount bet on that particular
- * @param {*} result this is the number of the result the wheel hit
- * @returns the amount that the person won, 0 if not won
- */
-function Roulette_inside(bet, amount, result) {
-  let result = getRandom(38);
-  for (let i = 0; i < bet.length; i++) {
-    if (bet[i] == result) {
-      if (bet.length == 1) {
-        return amount * 35;
-      }
-      if (bet.length == 2) {
-        return amount * 17;
-      }
-      if (bet.length == 3) {
-        return amount * 11;
-      }
-      if (bet.length == 4) {
-        return amount * 8;
-      }
-    }
-  }
-  return 0;
-}
-//1:first third
-//2: second third
-//3: third third
-// b: first half
-// f: second half
-// r:red
-//b:black
-// o:odd
-//e:even
-
-/**
- * This check if the result hit the bet and returns the amount won for outside bets
- *
- *
- * @param {*} bet the type of bet in a char
- * @param {*} amount the amount of coins bet int
- * @param {*} result the int of the number the wheel hit
- * @returns the amount won
- */
-function Roulette_outside(bet, amount, result) {
-  const red = [
-    1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
-  ];
-  const black = [
-    2, 4, 6, 8, 10, 11, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35,
-  ];
-  //let result = getRandom(38);
-  if (bet == "1") {
-    if (result < 13 && result > 0) {
-      return true;
-    }
-  }
-  if (bet == "2") {
-    if (result < 25 && result > 12) {
-      return amount * 3;
-    }
-  }
-  if (bet == "3") {
-    if (result < 37 && result > 24) {
-      return amount * 3;
-    }
-  }
-  if (bet == "b") {
-    if (result < 25 && result > 0) {
-      return amount * 2;
-    }
-  }
-  if (bet == "f") {
-    if (result < 37 && result > 24) {
-      return amount * 2;
-    }
-  }
-  if (bet == "r") {
-    if (red.includes(result)) {
-      return amount * 2;
-    }
-  }
-  if (bet == "b") {
-    if (black.includes(result)) {
-      return amount * 2;
-    }
-  }
-  if (bet == "o") {
-    if (result != 37 && result % 2 == 1) {
-      return amount * 2;
-    }
-  }
-  if (bet == "e") {
-    if (result != 0 && result % 2 == 0) {
-      return amount * 2;
-    }
-  }
-}
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import Authors from "./Authors";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
+import Shop from "./Shop";
+import accountDetails from "./SessionToken";
 
 /**
  *
@@ -159,6 +74,7 @@ function slot(slots) {
  */
 
 function slotToChar(slots) {
+  const symbols = [];
   for (let i = 0; i < slots.length; i++) {
     if (slots[i] == 0) {
       symbols[i] = "h";
@@ -191,6 +107,7 @@ function slotToChar(slots) {
       symbols[i] = "7";
     }
   }
+  return symbols;
 }
 /**
  * This is for 2 row slots
@@ -398,3 +315,118 @@ function Winner1(symbols) {
   }
   return 0;
 }
+
+function Slot4() {
+  const navigate = useNavigate;
+  const [viewer, setViewer] = useState(0);
+  const staticViewer = viewer;
+  document.body.style.background = "dark-blue";
+  return (
+    <div
+    // style={{
+    //   backgroundColor: "blue",
+    //   textColor: "white",
+    // }}
+    >
+      <nav
+        class="navbar navbar-expand navbar-dark bg-dark"
+        aria-label="Second navbar example"
+      >
+        <img height="50px" width="100px" src="Flag.png"></img>
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            Anti-Gambling Association of America
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarsExample02"
+            aria-controls="navbarsExample02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            {/* <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">
+                    Home
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    Link
+                  </a>
+                </li>
+              </ul> */}
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              onClick={navigate("/shop")}
+            >
+              Shop
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button type="button" class="btn btn-primary">
+              4-Slots
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button type="button" class="btn btn-primary">
+              2-Slots
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button type="button" class="btn btn-primary">
+              Roulette
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button type="button" class="btn btn-primary">
+              Sign-out
+            </button>
+          </div>
+          <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+            {/* <button class="btn btn-primary">Button</button> */}
+          </div>
+        </div>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/authors" element={<Authors />} />
+      </Routes>
+      {/* viewer === 1 && <Login></Login> */}
+      <footer class="footer mt-auto py-3 bg-body-tertiary">
+        <div class="container">
+          <span class="text-body-secondary">
+            Website by Wilson Chu and Anton Kordick
+          </span>
+          <div></div>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <button
+                  class="btn btn-secondary"
+                  onClick={navigate("/authors")}
+                >
+                  Authors
+                </button>
+              }
+            ></Route>
+          </Routes>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default Slot4;

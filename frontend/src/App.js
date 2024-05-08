@@ -13,6 +13,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Shop from "./Shop";
+import Slot4 from "./Slot4";
 
 const accountDetails = {
   _id: "",
@@ -111,6 +112,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/authors" element={<Authors />} />
+        <Route path="/Slot4" element={<Slot4 />} />
       </Routes>
       {/* viewer === 1 && <Login></Login> */}
       <footer class="footer mt-auto py-3 bg-body-tertiary">
