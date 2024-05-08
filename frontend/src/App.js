@@ -5,6 +5,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import Authors from "./Authors";
 import Slot2 from "./Slot2";
+import accountDetails from "./SessionToken";
 
 import {
   BrowserRouter as Router,
@@ -16,17 +17,6 @@ import {
 import Shop from "./Shop";
 import Slot4 from "./Slot4";
 import Roulette from "./Roulette";
-
-const accountDetails = {
-  _id: "",
-  password: "",
-  dob: "",
-  coins: 0,
-  credit_card_num: "",
-  credit_card_name: "",
-  credit_card_zip: "",
-  credit_card_cvv: "",
-};
 
 function App() {
   const navigate = useNavigate;
@@ -104,7 +94,10 @@ function App() {
             </button>
           </div>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            {/* <button class="btn btn-primary">Button</button> */}
+            <h4 class="navbar-brand" href="#">
+              Welcome Back, {accountDetails._id} Your balance is{" "}
+              {accountDetails.coins}
+            </h4>
           </div>
         </div>
       </nav>

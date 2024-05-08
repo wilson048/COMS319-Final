@@ -78,7 +78,6 @@ function Login() {
           return;
         }
         getAccountData(_id);
-        navigate("/shop");
       });
   }
 
@@ -130,6 +129,7 @@ function Login() {
         accountDetails.credit_card_name = updateThisAccount.credit_card_name;
         accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
         accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
+        navigate("/shop");
         // alert("Updated Account! Balance is now " + updateThisAccount.coins);
       });
   }

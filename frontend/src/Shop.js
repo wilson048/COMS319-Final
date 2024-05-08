@@ -158,14 +158,15 @@ function Shop() {
     })
       .then((response) => response.json())
       .then((updateThisAccount) => {
-        accountDetails._id = updateThisAccount._id;
-        accountDetails.password = updateThisAccount.password;
-        accountDetails.dob = updateThisAccount.dob;
-        accountDetails.coins = updateThisAccount.coins;
-        accountDetails.credit_card_num = updateThisAccount.credit_card_num;
-        accountDetails.credit_card_name = updateThisAccount.credit_card_name;
-        accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
-        accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
+        // console.log(updateThisAccount);
+        // accountDetails._id = updateThisAccount._id;
+        // accountDetails.password = updateThisAccount.password;
+        // accountDetails.dob = updateThisAccount.dob;
+        accountDetails.coins = accountDetails.coins + coinAmount;
+        accountDetails.credit_card_num = cardNum;
+        accountDetails.credit_card_name = cardName;
+        accountDetails.credit_card_zip = cardZip;
+        accountDetails.credit_card_cvv = cardCVV;
         navigate("/");
       });
   }
