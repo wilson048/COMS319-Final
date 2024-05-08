@@ -8,6 +8,7 @@ import {
   Route,
   Routes,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 import Shop from "./Shop";
 
@@ -23,6 +24,7 @@ const accountDetails = {
 };
 
 function App() {
+  const navigate = useNavigate;
   const [viewer, setViewer] = useState(0);
   const staticViewer = viewer;
   document.body.style.background = "dark-blue";
@@ -67,6 +69,35 @@ function App() {
                 </a>
               </li>
             </ul> */}
+            <Router>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={navigate("/shop")}
+              >
+                Shop
+              </button>
+            </Router>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button type="button" class="btn btn-primary">
+              4-Slots
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button type="button" class="btn btn-primary">
+              2-Slots
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button type="button" class="btn btn-primary">
+              Roulette
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <button type="button" class="btn btn-primary">
+              Sign-out
+            </button>
           </div>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
             {/* <button class="btn btn-primary">Button</button> */}
