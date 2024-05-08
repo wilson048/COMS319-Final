@@ -188,7 +188,14 @@ function Shop() {
     })
       .then((response) => response.json())
       .then((updateThisAccount) => {
-        alert("Updated Account! Balance is now " + updateThisAccount.coins);
+        accountDetails._id = updateThisAccount._id;
+        accountDetails.password = updateThisAccount.password;
+        accountDetails.dob = updateThisAccount.dob;
+        accountDetails.coins = updateThisAccount.coins;
+        accountDetails.credit_card_num = updateThisAccount.credit_card_num;
+        accountDetails.credit_card_name = updateThisAccount.credit_card_name;
+        accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
+        accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
       });
   }
 
