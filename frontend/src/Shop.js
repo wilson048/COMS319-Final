@@ -12,6 +12,33 @@ import {
 
 function Shop() {
   const navigate = useNavigate();
+  const [cart, setCart] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+
+  const addToCart = (el) => {
+    setCart([...cart, el]);
+  };
+
+  const removeFromCart = (el) => {
+    let itemFound = false;
+    const updatedCart = cart.filter((cartItem) => {
+      if (cartItem.id === el.id && !itemFound) {
+        itemFound = true;
+        return false;
+      }
+      return true;
+    });
+    if (itemFound) {
+      setCart(updatedCart);
+      if (cart.length === 0) {
+      }
+    }
+  };
+
+  function howManyofThis(id) {
+    let hmot = cart.filter((cartItem) => cartItem.id === id);
+    return hmot.length;
+  }
   function addNewAccount() {
     // Fetch the value from the input field
 
@@ -105,18 +132,58 @@ function Shop() {
   //   });
   // }
 
-  function updateAccount(_id, coins) {
-    fetch(`http://localhost:8081/updateAccount/${_id}`, {
+  function updateAccount(coins) {
+    let cardNum = document.getElementById("cardNumber").value;
+    let cardName = document.getElementById("cardName").value;
+    let cardZip = document.getElementById("cardZipcode").value;
+    let cardCVV = document.getElementById("cardCVV").value;
+
+    if (
+      cardNum == "" ||
+      cardNum == null ||
+      cardName == "" ||
+      cardName == null ||
+      cardZip == "" ||
+      cardZip == null ||
+      cardCVV == "" ||
+      cardCVV == null
+    ) {
+      alert("Must fill in all fields");
+      return;
+    }
+
+    if (isNaN(cardNum) || isNaN(cardZip) || isNaN(cardCVV)) {
+      alert("Must put in integer values for numbers");
+      return;
+    }
+
+    if (cardNum.length != 16 || cardZip.length != 5 || cardCVV.length != 3) {
+      alert(
+        "Must put in correct integer sizes for numbers (number: 16, zipcode: 5, CVV: 3)"
+      );
+      return;
+    }
+    console.log({
+      password: accountDetails.password, // also "name": req.body.name,
+      dob: accountDetails.dob, // also "price": req.body.price,
+      coins: 1250, // all fresh accounts start with 500 coins
+      credit_card_num: cardNum, // credit card information is not initally saved
+      credit_card_name: cardName,
+      credit_card_zip: cardZip,
+      credit_card_cvv: cardCVV,
+    });
+    fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
       method: "PUT",
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        _id: accountDetails._id, // also "id": req.body.id,
+        // _id: accountDetails._id, // also "id": req.body.id,
         password: accountDetails.password, // also "name": req.body.name,
         dob: accountDetails.dob, // also "price": req.body.price,
-        coins: coins, // all fresh accounts start with 500 coins
-        credit_card_num: accountDetails.credit_card_num, // credit card information is not initally saved
-        credit_card_name: accountDetails.credit_card_name,
-        credit_card_zip: accountDetails.credit_card_zip,
-        credit_card_cvv: accountDetails.credit_card_cvv,
+        coins: 1250, // all fresh accounts start with 500 coins
+        credit_card_num: cardNum, // credit card information is not initally saved
+        credit_card_name: cardName,
+        credit_card_zip: cardZip,
+        credit_card_cvv: cardCVV,
       }),
     })
       .then((response) => response.json())
@@ -151,17 +218,34 @@ function Shop() {
       <div class="container">
         <div class="col-md-7 col-lg-8">
           <hr class="my-4"></hr>
-          <h4 class="mb-3">Sign In</h4>
+          <h4 class="mb-3">Select your coin amount</h4>
+          <button
+            class="w-25 btn btn-primary btn-lg"
+            onClick={() => navigate("/Slot4")}
+          >
+            <span class="text-body-primary">750 coins</span>
+            <img src="Coins.png"></img>
+          </button>
+          <span class="w-25"></span>
+          <button
+            class="w-25 btn btn-primary btn-lg"
+            onClick={() => navigate("/Slot4")}
+          >
+            <span class="text-body-primary">1500 coins</span>
+            <img src="Coins.png"></img>
+          </button>
+          <hr class="my-4"></hr>
+          <h4 class="mb-3">Card Information</h4>
 
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="newCardNumber" class="form-label">
+              <label for="cardNumber" class="form-label">
                 Card Number
               </label>
               <input
                 type="text"
                 class="form-control"
-                id="newCardNumber"
+                id="cardNumber"
                 placeholder=""
                 required
               ></input>
@@ -169,26 +253,39 @@ function Shop() {
             </div>
 
             <div class="col-sm-6">
-              <label for="newCardName" class="form-label">
+              <label for="cardName" class="form-label">
                 Card Name
               </label>
               <input
-                type="password"
+                type="text"
                 class="form-control"
-                id="newCardName"
+                id="cardName"
                 placeholder=""
                 required
               ></input>
               <div class="invalid-feedback">Valid Title is required.</div>
             </div>
             <div class="col-sm-6">
-              <label for="newCardName" class="form-label">
-                Password
+              <label for="cardZipcode" class="form-label">
+                Card Zip Code
               </label>
               <input
-                type="password"
+                type="text"
                 class="form-control"
-                id="newCardName"
+                id="cardZipcode"
+                placeholder=""
+                required
+              ></input>
+              <div class="invalid-feedback">Valid Title is required.</div>
+            </div>
+            <div class="col-sm-6">
+              <label for="cardCVV" class="form-label">
+                Card CVV
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="cardCVV"
                 placeholder=""
                 required
               ></input>
@@ -211,13 +308,13 @@ function Shop() {
               class="w-50 btn btn-success btn-lg"
               onClick={() => updateAccount()}
             >
-              Log In
+              Purchase
             </button>
             <button
-              class="w-50 btn btn-primary btn-lg"
-              onClick={() => navigate("/signup")}
+              class="w-50 btn btn-danger btn-lg"
+              onClick={() => navigate("/Slot4")}
             >
-              Sign Up
+              Cancel
             </button>
           </div>
         </div>

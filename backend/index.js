@@ -114,7 +114,7 @@ app.put("/updateAccount/:username", async (req, res) => {
   console.log(req.body);
   const updateData = {
     $set: {
-      _id: req.body._id, // also "id": req.body.id,
+      // _id: req.body._id, // also "id": req.body.id,
       password: req.body.password, // also "name": req.body.name,
       dob: req.body.dob, // also "price": req.body.price,
       coins: req.body.coins, // all fresh accounts start with 500 coins
@@ -124,6 +124,7 @@ app.put("/updateAccount/:username", async (req, res) => {
       credit_card_cvv: req.body.credit_card_cvv,
     },
   };
+  console.log(updateData);
   // Add options if needed, for example { upsert: true } to create a document if it doesn't exist
   const options = {};
   const results = await db
