@@ -10,6 +10,61 @@ import {
 } from "react-router-dom";
 import Slot4 from "./Slot4";
 
+function Spin(bets) {
+  let coins = accountDetails.coins;
+  let totalPaid = 0;
+  let totalWon = 0;
+  for (let i = 0; i < bets.length; i++) {
+    totalPaid = totalPaid + bets[3];
+  }
+  //whole lot of bullshit to allow separate bets on same line
+  //fix make a total for all cost then look at the bets
+  if (totalPaid > accountDetails.coins) {
+    alert(
+      "Brosky you are too poor for this. Go buy more they are literally free"
+    );
+  } else {
+    let result = getRandom(38);
+    coins = coins - totalPaid;
+    for (let i = 0; i < bets.length; i++) {
+      currentBet = bets[i];
+      //maybe pull elements out here
+      if (currentBet[0] == 0) {
+        totalWon =
+          totalWon + Roulette_inside(currentBet[3], currentBet[1], result);
+      } else {
+        totalWon =
+          totalWon + Roulette_outside(currentBet[3], currentBet[1], result);
+      }
+    }
+    coins = coins + totalWon;
+    fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        // _id: accountDetails._id, // also "id": req.body.id,
+        password: accountDetails.password, // also "name": req.body.name,
+        dob: accountDetails.dob, // also "price": req.body.price,
+        coins: coins, // all fresh accounts start with 500 coins
+        credit_card_num: accountDetails.credit_card_num, // credit card information is not initally saved
+        credit_card_name: accountDetails.credit_card_name,
+        credit_card_zip: accountDetails.credit_card_zip,
+        credit_card_cvv: accountDetails.credit_card_cvv,
+      }),
+    })
+      .then((response) => response.json())
+      .then((updateThisAccount) => {
+        accountDetails._id = updateThisAccount._id;
+        accountDetails.password = updateThisAccount.password;
+        accountDetails.dob = updateThisAccount.dob;
+        accountDetails.coins = updateThisAccount.coins;
+        accountDetails.credit_card_num = updateThisAccount.credit_card_num;
+        accountDetails.credit_card_name = updateThisAccount.credit_card_name;
+        accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
+        accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
+      });
+  }
+}
 /**
  * This check if the result hit the bet and returns the amount won for inside bets
  * @param {*} bet this is the number or numbers of the bet in an array of ints
@@ -19,7 +74,7 @@ import Slot4 from "./Slot4";
  */
 
 function Roulette_inside(bet, amount, result) {
-  result = getRandom(38);
+  //result = getRandom(38);
   for (let i = 0; i < bet.length; i++) {
     if (bet[i] == result) {
       if (bet.length == 1) {

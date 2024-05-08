@@ -16,6 +16,41 @@ import {
 import Shop from "./Shop";
 import accountDetails from "./SessionToken";
 
+function PullLever() {
+  let coins = accountDetails.coins;
+  if (coins < 50) {
+    alert("Brosky you are too poor for this. Go more they are literally free");
+  } else {
+    coins = coins - 50;
+    let reward = RunSlot1();
+    coins = coins + reward;
+    fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        // _id: accountDetails._id, // also "id": req.body.id,
+        password: accountDetails.password, // also "name": req.body.name,
+        dob: accountDetails.dob, // also "price": req.body.price,
+        coins: coins, // all fresh accounts start with 500 coins
+        credit_card_num: accountDetails.credit_card_num, // credit card information is not initally saved
+        credit_card_name: accountDetails.credit_card_name,
+        credit_card_zip: accountDetails.credit_card_zip,
+        credit_card_cvv: accountDetails.credit_card_cvv,
+      }),
+    })
+      .then((response) => response.json())
+      .then((updateThisAccount) => {
+        accountDetails._id = updateThisAccount._id;
+        accountDetails.password = updateThisAccount.password;
+        accountDetails.dob = updateThisAccount.dob;
+        accountDetails.coins = updateThisAccount.coins;
+        accountDetails.credit_card_num = updateThisAccount.credit_card_num;
+        accountDetails.credit_card_name = updateThisAccount.credit_card_name;
+        accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
+        accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
+      });
+  }
+}
 /**
  *
  * @returns this function returns how much was won after spinning lot one
