@@ -331,35 +331,21 @@ function Slot4() {
       <div class="container">
         <div class="col-md-7 col-lg-8">
           <hr class="my-4"></hr>
-          <h4 class="mb-3">Log In</h4>
-
+          <h4 class="mb-3">4-Lain Slots Test Your Luck Feed </h4>
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="newUsername" class="form-label">
-                Username
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="newUsername"
-                placeholder=""
-                required
-              ></input>
-              <div class="invalid-feedback">Valid ID is required</div>
+              <img height="50px" width="100px" src="Flag.png"></img>
             </div>
 
             <div class="col-sm-6">
-              <label for="newPassword" class="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                class="form-control"
-                id="newPassword"
-                placeholder=""
-                required
-              ></input>
-              <div class="invalid-feedback">Valid Title is required.</div>
+              <img height="50px" width="100px" src="Flag.png"></img>
+            </div>
+
+            <div class="col-sm-6">
+              <img height="50px" width="100px" src="Flag.png"></img>
+            </div>
+            <div class="col-sm-6">
+              <img height="50px" width="100px" src="Flag.png"></img>
             </div>
           </div>
 
