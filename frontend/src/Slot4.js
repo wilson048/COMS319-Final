@@ -21,19 +21,9 @@ import accountDetails from "./SessionToken";
  * @returns this function returns how much was won after spinning lot one
  */
 function RunSlot1() {
-  const slot = [0, 0, 0, 0];
-  let symbols = slot(slot);
+  const slots = [0, 0, 0, 0];
+  let symbols = slot(slots);
   let reward = Winner1(symbols);
-  return reward;
-}
-/**
- *
- * @returns this function returns how much was won after spinning lot two
- */
-function RunSlot2() {
-  const slot = [0, 0];
-  let symbols = slot(slot);
-  let reward = Winner2(symbols);
   return reward;
 }
 /**
@@ -317,114 +307,68 @@ function Winner1(symbols) {
 }
 
 function Slot4() {
-  const navigate = useNavigate;
-  const [viewer, setViewer] = useState(0);
-  const staticViewer = viewer;
-  document.body.style.background = "dark-blue";
   return (
-    <div
-    // style={{
-    //   backgroundColor: "blue",
-    //   textColor: "white",
-    // }}
-    >
-      <nav
-        class="navbar navbar-expand navbar-dark bg-dark"
-        aria-label="Second navbar example"
-      >
-        <img height="50px" width="100px" src="Flag.png"></img>
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            Anti-Gambling Association of America
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarsExample02"
-            aria-controls="navbarsExample02"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <div>
+      <div class="container">
+        <div class="col-md-7 col-lg-8">
+          <hr class="my-4"></hr>
+          <h4 class="mb-3">Log In</h4>
 
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            {/* <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">
-                    Home
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    Link
-                  </a>
-                </li>
-              </ul> */}
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="newUsername" class="form-label">
+                Username
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="newUsername"
+                placeholder=""
+                required
+              ></input>
+              <div class="invalid-feedback">Valid ID is required</div>
+            </div>
 
+            <div class="col-sm-6">
+              <label for="newPassword" class="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                class="form-control"
+                id="newPassword"
+                placeholder=""
+                required
+              ></input>
+              <div class="invalid-feedback">Valid Title is required.</div>
+            </div>
+          </div>
+
+          {/* <hr class="my-4"></hr>
+          <div class="col-md-7 col-lg-8">
             <button
-              type="button"
-              class="btn btn-primary"
-              onClick={navigate("/shop")}
+              class="w-50 btn btn-primary btn-lg"
+              onClick={() => addNewAccount()}
             >
-              Shop
+              Create Account
             </button>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <button type="button" class="btn btn-primary">
-              4-Slots
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <button type="button" class="btn btn-primary">
-              2-Slots
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <button type="button" class="btn btn-primary">
-              Roulette
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <button type="button" class="btn btn-primary">
-              Sign-out
-            </button>
-          </div>
-          <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            {/* <button class="btn btn-primary">Button</button> */}
-          </div>
+          </div> */}
+          <hr class="my-4 "></hr>
+          <div class="col-md-7 col-lg-8 d-flex gap-2 justify-content-center py-5"></div>
         </div>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/authors" element={<Authors />} />
-      </Routes>
-      {/* viewer === 1 && <Login></Login> */}
-      <footer class="footer mt-auto py-3 bg-body-tertiary">
-        <div class="container">
-          <span class="text-body-secondary">
-            Website by Wilson Chu and Anton Kordick
-          </span>
-          <div></div>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <button
-                  class="btn btn-secondary"
-                  onClick={navigate("/authors")}
-                >
-                  Authors
-                </button>
-              }
-            ></Route>
-          </Routes>
-        </div>
-      </footer>
+        {/* <button
+          class="w-50 btn btn-primary btn-lg"
+          onClick={() => deleteAccount()}
+        >
+          Delete Account
+        </button>
+        <button
+          class="w-50 btn btn-primary btn-lg"
+          onClick={() => updateAccount()}
+        >
+          Update Coins
+        </button> */}
+      </div>
     </div>
   );
 }
