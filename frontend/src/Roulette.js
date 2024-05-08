@@ -15,7 +15,8 @@ function Spin(bets) {
   let totalPaid = 0;
   let totalWon = 0;
   for (let i = 0; i < bets.length; i++) {
-    totalPaid = totalPaid + bets[3];
+    let currentBet = bets[i];
+    totalPaid = totalPaid + currentBet[2];
   }
   //whole lot of bullshit to allow separate bets on same line
   //fix make a total for all cost then look at the bets
@@ -28,13 +29,14 @@ function Spin(bets) {
     coins = coins - totalPaid;
     for (let i = 0; i < bets.length; i++) {
       let currentBet = bets[i];
+      let type = currentBet[0];
+      let betItem = currentBet[1];
+      let amount = currentBet[2];
       //maybe pull elements out here
-      if (currentBet[0] == 0) {
-        totalWon =
-          totalWon + Roulette_inside(currentBet[3], currentBet[1], result);
+      if (type == 0) {
+        totalWon = totalWon + Roulette_inside(amount, betItem, result);
       } else {
-        totalWon =
-          totalWon + Roulette_outside(currentBet[3], currentBet[1], result);
+        totalWon = totalWon + Roulette_outside(amount, betItem, result);
       }
     }
     coins = coins + totalWon;
