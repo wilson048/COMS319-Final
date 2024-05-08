@@ -27,7 +27,7 @@ function Spin(bets) {
     let result = getRandom(38);
     coins = coins - totalPaid;
     for (let i = 0; i < bets.length; i++) {
-      currentBet = bets[i];
+      let currentBet = bets[i];
       //maybe pull elements out here
       if (currentBet[0] == 0) {
         totalWon =

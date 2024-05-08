@@ -12,33 +12,7 @@ import {
 
 function Shop() {
   const navigate = useNavigate();
-  const [cart, setCart] = useState([]);
-  const [cartTotal, setCartTotal] = useState(0);
-
-  const addToCart = (el) => {
-    setCart([...cart, el]);
-  };
-
-  const removeFromCart = (el) => {
-    let itemFound = false;
-    const updatedCart = cart.filter((cartItem) => {
-      if (cartItem.id === el.id && !itemFound) {
-        itemFound = true;
-        return false;
-      }
-      return true;
-    });
-    if (itemFound) {
-      setCart(updatedCart);
-      if (cart.length === 0) {
-      }
-    }
-  };
-
-  function howManyofThis(id) {
-    let hmot = cart.filter((cartItem) => cartItem.id === id);
-    return hmot.length;
-  }
+  const [coinAmount, setCoinAmount] = useState(0);
   function addNewAccount() {
     // Fetch the value from the input field
 
@@ -163,15 +137,11 @@ function Shop() {
       );
       return;
     }
-    console.log({
-      password: accountDetails.password, // also "name": req.body.name,
-      dob: accountDetails.dob, // also "price": req.body.price,
-      coins: 1250, // all fresh accounts start with 500 coins
-      credit_card_num: cardNum, // credit card information is not initally saved
-      credit_card_name: cardName,
-      credit_card_zip: cardZip,
-      credit_card_cvv: cardCVV,
-    });
+
+    if (coinAmount === 0) {
+      alert("Must add coins to cart");
+    }
+    console.log(accountDetails);
     fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
@@ -179,7 +149,7 @@ function Shop() {
         // _id: accountDetails._id, // also "id": req.body.id,
         password: accountDetails.password, // also "name": req.body.name,
         dob: accountDetails.dob, // also "price": req.body.price,
-        coins: 1250, // all fresh accounts start with 500 coins
+        coins: accountDetails.coins + coinAmount,
         credit_card_num: cardNum, // credit card information is not initally saved
         credit_card_name: cardName,
         credit_card_zip: cardZip,
@@ -196,6 +166,7 @@ function Shop() {
         accountDetails.credit_card_name = updateThisAccount.credit_card_name;
         accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
         accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
+        navigate("/");
       });
   }
 
@@ -225,22 +196,50 @@ function Shop() {
       <div class="container">
         <div class="col-md-7 col-lg-8">
           <hr class="my-4"></hr>
-          <h4 class="mb-3">Select your coin amount</h4>
+          <h4 class="mb-3">Add coins</h4>
           <button
             class="w-25 btn btn-primary btn-lg"
-            onClick={() => navigate("/Slot4")}
+            onClick={() => setCoinAmount(coinAmount + 750)}
           >
-            <span class="text-body-primary">750 coins</span>
+            <span class="text-body-primary">+750 coins</span>
             <img src="Coins.png"></img>
           </button>
           <span class="w-25"></span>
           <button
             class="w-25 btn btn-primary btn-lg"
-            onClick={() => navigate("/Slot4")}
+            onClick={() => setCoinAmount(coinAmount + 1500)}
           >
-            <span class="text-body-primary">1500 coins</span>
+            <span class="text-body-primary">+1500 coins</span>
             <img src="Coins.png"></img>
           </button>
+
+          {coinAmount !== 0 && (
+            <div>
+              <button
+                class="w-25 btn btn-danger btn-lg"
+                onClick={() => setCoinAmount(Math.max(coinAmount - 750), 0)}
+              >
+                <span class="text-body-primary">-750 coins</span>
+                <img src="Coins.png"></img>
+              </button>
+              <span class="w-25"></span>
+              <button
+                class="w-25 btn btn-danger btn-lg"
+                onClick={() => {
+                  if (coinAmount - 1500 < 0) {
+                    setCoinAmount(0);
+                  } else {
+                    setCoinAmount(coinAmount - 1500);
+                  }
+                }}
+              >
+                <span class="text-body-primary">-1500 coins</span>
+                <img src="Coins.png"></img>
+              </button>
+              <h4 class="my-4">Total Coins: {coinAmount}</h4>
+            </div>
+          )}
+
           <hr class="my-4"></hr>
           <h4 class="mb-3">Card Information</h4>
 
@@ -319,7 +318,7 @@ function Shop() {
             </button>
             <button
               class="w-50 btn btn-danger btn-lg"
-              onClick={() => navigate("/Slot4")}
+              onClick={() => navigate("/")}
             >
               Cancel
             </button>
