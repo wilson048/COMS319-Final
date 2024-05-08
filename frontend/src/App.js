@@ -3,6 +3,8 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import Authors from "./Authors";
+
 import {
   BrowserRouter as Router,
   Route,
@@ -69,15 +71,14 @@ function App() {
                 </a>
               </li>
             </ul> */}
-            <Router>
-              <button
-                type="button"
-                class="btn btn-primary"
-                onClick={navigate("/shop")}
-              >
-                Shop
-              </button>
-            </Router>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              onClick={navigate("/shop")}
+            >
+              Shop
+            </button>
           </div>
           <div class="collapse navbar-collapse" id="navbarsExample02">
             <button type="button" class="btn btn-primary">
@@ -104,14 +105,35 @@ function App() {
           </div>
         </div>
       </nav>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/shop" element={<Shop />} />
-        </Routes>
-      </Router>
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/authors" element={<Authors />} />
+      </Routes>
       {/* viewer === 1 && <Login></Login> */}
+      <footer class="footer mt-auto py-3 bg-body-tertiary">
+        <div class="container">
+          <span class="text-body-secondary">
+            Website by Wilson Chu and Anton Kordick
+          </span>
+          <div></div>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <button
+                  class="btn btn-secondary"
+                  onClick={navigate("/authors")}
+                >
+                  Authors
+                </button>
+              }
+            ></Route>
+          </Routes>
+        </div>
+      </footer>
     </div>
   );
 }
