@@ -100,22 +100,6 @@ function slotToChar(slots) {
   return symbols;
 }
 /**
- * This is for 2 row slots
- * @param {*} symbols the symbols that are the reults
- * @returns the amount earned
- */
-function Winner2(symbols) {
-  if (symbols[0] == "l" && symbols[1] == "l") return 0;
-  if (symbols[0] == "7" && symbols[1] == "7") return 50;
-  if (symbols[0] == "w" && symbols[1] == "w") return 35;
-  if (symbols[0] == "s" && symbols[1] == "s") return 25;
-  if (symbols[0] == "c" && symbols[1] == "c") return 15;
-  if (symbols[0] == symbols[1]) return 5;
-  if (symbols[1] == "h" || symbols[0] == "h") return 3;
-  if (symbols[1] == "g" || symbols[0] == "g") return 2;
-  return 0;
-}
-/**
  * This is for 4 row slots
  * @param {*} symbols the symbols that are the reults
  * @returns the amount earned

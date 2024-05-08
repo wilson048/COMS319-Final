@@ -111,3 +111,81 @@ function Roulette_outside(bet, amount, result) {
     }
   }
 }
+/**
+ * used for different results to get a random number
+ * @param {*} top the max for the random function
+ * @returns the random result
+ */
+function getRandom(top) {
+  let rand = Math.floor(Math.random() * top);
+  return rand;
+}
+
+function Roulette() {
+  return (
+    <div>
+      <div class="container">
+        <div class="col-md-7 col-lg-8">
+          <hr class="my-4"></hr>
+          <h4 class="mb-3">Log In</h4>
+
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="newUsername" class="form-label">
+                Username
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="newUsername"
+                placeholder=""
+                required
+              ></input>
+              <div class="invalid-feedback">Valid ID is required</div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="newPassword" class="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                class="form-control"
+                id="newPassword"
+                placeholder=""
+                required
+              ></input>
+              <div class="invalid-feedback">Valid Title is required.</div>
+            </div>
+          </div>
+
+          {/* <hr class="my-4"></hr>
+            <div class="col-md-7 col-lg-8">
+              <button
+                class="w-50 btn btn-primary btn-lg"
+                onClick={() => addNewAccount()}
+              >
+                Create Account
+              </button>
+            </div> */}
+          <hr class="my-4 "></hr>
+          <div class="col-md-7 col-lg-8 d-flex gap-2 justify-content-center py-5"></div>
+        </div>
+        {/* <button
+            class="w-50 btn btn-primary btn-lg"
+            onClick={() => deleteAccount()}
+          >
+            Delete Account
+          </button>
+          <button
+            class="w-50 btn btn-primary btn-lg"
+            onClick={() => updateAccount()}
+          >
+            Update Coins
+          </button> */}
+      </div>
+    </div>
+  );
+}
+
+export default Roulette;
