@@ -67,7 +67,7 @@ function Login() {
     })
       .then((response) => {
         console.log(response);
-        if (response.status == 400 || response.status == 404) {
+        if (response.status == 400 || response.status == 404 || !response.ok) {
           alert("Account not found or Wrong Password");
           return null;
         }
@@ -130,7 +130,6 @@ function Login() {
         accountDetails.credit_card_name = updateThisAccount.credit_card_name;
         accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
         accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
-        console.log(accountDetails);
         // alert("Updated Account! Balance is now " + updateThisAccount.coins);
       });
   }
@@ -161,7 +160,7 @@ function Login() {
       <div class="container">
         <div class="col-md-7 col-lg-8">
           <hr class="my-4"></hr>
-          <h4 class="mb-3">Sign In</h4>
+          <h4 class="mb-3">Log In</h4>
 
           <div class="row g-3">
             <div class="col-sm-6">

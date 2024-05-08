@@ -65,6 +65,16 @@ app.post("/addAccount", async (req, res) => {
       credit_card_cvv: "",
     };
     console.log(newDocument);
+    const dupe_check = await db
+      .collection("anti_gambling_accounts")
+      .findOne({ _id: values[0] });
+    console.log(dupe_check);
+    if (dupe_check != null) {
+      // console.error("An error occurred:", error);
+      // res.send("Username Already Exists").status(500);
+      // console.log(500 + " Username Already Exists");
+      throw "Username Already Exists";
+    }
     const results = await db
       .collection("anti_gambling_accounts")
       .insertOne(newDocument);
@@ -72,7 +82,8 @@ app.post("/addAccount", async (req, res) => {
     res.send(results);
   } catch (error) {
     console.error("An error occurred:", error);
-    res.send({ error: "An internal server error occurred" }).status(500);
+    res.send("An internal server error occurred").status(500);
+    console.log(500 + " Internal Server Error");
   }
 });
 
