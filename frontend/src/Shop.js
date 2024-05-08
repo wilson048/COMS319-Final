@@ -155,13 +155,13 @@ function Shop() {
 
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="newUsername" class="form-label">
-                Username
+              <label for="newCardNumber" class="form-label">
+                Card Number
               </label>
               <input
                 type="text"
                 class="form-control"
-                id="newUsername"
+                id="newCardNumber"
                 placeholder=""
                 required
               ></input>
@@ -169,13 +169,26 @@ function Shop() {
             </div>
 
             <div class="col-sm-6">
-              <label for="newPassword" class="form-label">
+              <label for="newCardName" class="form-label">
+                Card Name
+              </label>
+              <input
+                type="password"
+                class="form-control"
+                id="newCardName"
+                placeholder=""
+                required
+              ></input>
+              <div class="invalid-feedback">Valid Title is required.</div>
+            </div>
+            <div class="col-sm-6">
+              <label for="newCardName" class="form-label">
                 Password
               </label>
               <input
                 type="password"
                 class="form-control"
-                id="newPassword"
+                id="newCardName"
                 placeholder=""
                 required
               ></input>
