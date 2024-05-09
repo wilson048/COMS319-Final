@@ -34,7 +34,7 @@ function App() {
         class="navbar navbar-expand navbar-dark bg-dark"
         aria-label="Second navbar example"
       >
-        <img height="50px" width="100px" src="Flag.png"></img>
+        <img width="100px" height="50px" src="Flag.png"></img>
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
             Anti-Gambling Association of America
@@ -96,7 +96,7 @@ function App() {
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
             <h4 class="navbar-brand" href="#">
               Welcome Back, {accountDetails._id} Your balance is{" "}
-              {accountDetails.coins}
+              {accountDetails.coins} {" Coins"}
             </h4>
           </div>
         </div>

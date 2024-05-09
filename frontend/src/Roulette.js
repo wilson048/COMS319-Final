@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.css";
 import accountDetails from "./SessionToken";
+import { Wheel } from "react-custom-roulette";
 import {
   BrowserRouter as Router,
   Route,
@@ -179,15 +180,75 @@ function getRandom(top) {
 }
 
 function Roulette() {
+  const data = [
+    { option: "0", style: { backgroundColor: "green", textColor: "white" } },
+    { option: "1", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "2", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "3", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "4", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "5", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "6", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "7", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "8", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "9", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "10", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "11", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "12", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "13", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "14", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "15", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "16", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "17", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "18", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "19", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "20", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "21", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "22", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "23", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "24", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "25", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "26", style: { backgroundColor: "red", textColor: "white" } },
+    { option: "27", style: { backgroundColor: "black", textColor: "white" } },
+    { option: "28", style: { backgroundColor: "red", textColor: "white" } },
+    // { option: "29", style: { backgroundColor: "black", textColor: "white" } },
+    // { option: "30", style: { backgroundColor: "red", textColor: "white" } },
+    // { option: "31", style: { backgroundColor: "black", textColor: "white" } },
+    // { option: "32", style: { backgroundColor: "red", textColor: "white" } },
+    // { option: "33", style: { backgroundColor: "black", textColor: "white" } },
+    // { option: "34", style: { backgroundColor: "red", textColor: "white" } },
+    // { option: "35", style: { backgroundColor: "black", textColor: "white" } },
+    // { option: "36", style: { backgroundColor: "red", textColor: "white" } },
+  ];
+  const [mustSpin, setMustSpin] = useState(false);
+  const [prizeNumber, setPrizeNumber] = useState(0);
+
+  const handleSpinClick = (num) => {
+    if (!mustSpin) {
+      const newPrizeNumber = Math.floor(Math.random() * data.length);
+      setPrizeNumber(newPrizeNumber);
+      setMustSpin(true);
+    }
+  };
   return (
     <div>
       <div class="container">
         <div class="col-md-7 col-lg-8">
+          <Wheel
+            mustStartSpinning={mustSpin}
+            prizeNumber={prizeNumber}
+            data={data}
+            onStopSpinning={() => {
+              setMustSpin(false);
+            }}
+          />
+          <button class="btn btn-secondary" onClick={handleSpinClick}>
+            SPIN
+          </button>
           <hr class="my-4"></hr>
-          <h4 class="mb-3">Log In</h4>
+          {/* <h4 class="mb-3">Log In</h4> */}
 
           <div class="row g-3">
-            <div class="col-sm-6">
+            {/* <div class="col-sm-6">
               <label for="newUsername" class="form-label">
                 Username
               </label>
@@ -213,7 +274,7 @@ function Roulette() {
                 required
               ></input>
               <div class="invalid-feedback">Valid Title is required.</div>
-            </div>
+            </div> */}
           </div>
 
           {/* <hr class="my-4"></hr>

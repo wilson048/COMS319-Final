@@ -84,8 +84,8 @@ function Authors() {
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading fw-normal lh-1">
-            Fakestore Admin Webiste{" "}
-            <span class="text-body-secondary">Assignment 3</span>
+            Anti-Gambling Association of America Website{" "}
+            <span class="text-body-secondary">Final Project</span>
           </h2>
           <p class="lead">
             This website consists of two different forms of games commonly seen

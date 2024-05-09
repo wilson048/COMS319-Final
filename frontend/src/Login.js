@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.css";
 import accountDetails from "./SessionToken";
+import { Wheel } from "react-custom-roulette";
 import {
   BrowserRouter as Router,
   Route,
@@ -154,7 +155,21 @@ function Login() {
   //       alert("Deleted Account!");
   //     });
   // }
+  const data = [
+    { option: "0", style: { backgroundColor: "green", textColor: "black" } },
+    { option: "1", style: { backgroundColor: "white" } },
+    { option: "2" },
+  ];
+  const [mustSpin, setMustSpin] = useState(false);
+  const [prizeNumber, setPrizeNumber] = useState(0);
 
+  const handleSpinClick = () => {
+    if (!mustSpin) {
+      const newPrizeNumber = Math.floor(Math.random() * data.length);
+      setPrizeNumber(newPrizeNumber);
+      setMustSpin(true);
+    }
+  };
   return (
     <div>
       <div class="container">
@@ -247,6 +262,7 @@ function Login() {
         >
           Update Coins
         </button> */}
+
         <footer class="footer mt-auto py-3 bg-body-tertiary">
           <div class="container">
             <span class="text-body-secondary">

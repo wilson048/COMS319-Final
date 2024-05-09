@@ -53,7 +53,7 @@ function Login() {
         getAccountData(_id);
       })
       .catch((error) => {
-        console.log(error);
+        alert("Username already exists!");
       });
   }
 
