@@ -110,6 +110,7 @@ function App() {
         <Route path="/Slot4" element={<Slot4 />} />
         <Route path="/Slot2" element={<Slot2 />} />
         <Route path="/Roulette" element={<Roulette />} />
+        <Route path="/Slots" element={<Slots />} />
       </Routes>
       {/* viewer === 1 && <Login></Login> */}
       <footer class="footer mt-auto py-3 bg-body-tertiary">

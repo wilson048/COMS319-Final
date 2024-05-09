@@ -332,19 +332,18 @@ function Slot4() {
         <div class="col-md-7 col-lg-8">
           <hr class="my-4"></hr>
           <h4 class="mb-3">4-Lain Slots Test Your Luck Feed </h4>
-          <div class="row g-3">
-            <div class="col-sm-6">
+          <div class="row g-10">
+            <div class="col-sm-8">
+              <img height="50px" width="100px" src="Flag.png"></img>
+            </div>
+            <div class="col-sm-12">
               <img height="50px" width="100px" src="Flag.png"></img>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <img height="50px" width="100px" src="Flag.png"></img>
             </div>
-
-            <div class="col-sm-6">
-              <img height="50px" width="100px" src="Flag.png"></img>
-            </div>
-            <div class="col-sm-6">
+            <div class="col-sm-10">
               <img height="50px" width="100px" src="Flag.png"></img>
             </div>
           </div>
