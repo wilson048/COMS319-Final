@@ -167,7 +167,7 @@ function Shop() {
         accountDetails.credit_card_name = cardName;
         accountDetails.credit_card_zip = cardZip;
         accountDetails.credit_card_cvv = cardCVV;
-        navigate("/");
+        navigate("/Roulette");
       });
   }
 
@@ -326,7 +326,7 @@ function Shop() {
             </button>
             <button
               class="w-50 btn btn-danger btn-lg"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/Roulette")}
             >
               Cancel
             </button>

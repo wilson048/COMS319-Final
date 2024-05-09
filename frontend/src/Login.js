@@ -135,26 +135,26 @@ function Login() {
       });
   }
 
-  // function deleteAccount() {
-  //   // Fetch the value from the input field
+  function deleteAccount() {
+    // Fetch the value from the input field
 
-  //   let _id = document.getElementById("newUsername").value;
+    let _id = document.getElementById("newUsername").value;
 
-  //   if (_id == null || _id == "") {
-  //     alert("Fill all text fields correctly (Username)");
-  //     return;
-  //   }
+    if (_id == null || _id == "") {
+      alert("Fill all text fields correctly (Username)");
+      return;
+    }
 
-  //   console.log(_id);
-  //   fetch(`http://localhost:8081/deleteAccount/${_id}`, {
-  //     method: "DELETE",
-  //     headers: { "content-type": "application/json" },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((addThisProduct) => {
-  //       alert("Deleted Account!");
-  //     });
-  // }
+    console.log(_id);
+    fetch(`http://localhost:8081/deleteAccount/${_id}`, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((addThisProduct) => {
+        alert("Deleted Account!");
+      });
+  }
 
   return (
     <div>
@@ -217,22 +217,10 @@ function Login() {
               Sign Up
             </button>
             <button
-              class="w-50 btn btn-primary btn-lg"
-              onClick={() => navigate("/Slot4")}
+              class="w-50 btn btn-danger btn-lg"
+              onClick={() => deleteAccount()}
             >
-              Slot-4
-            </button>
-            <button
-              class="w-50 btn btn-primary btn-lg"
-              onClick={() => navigate("/Slot2")}
-            >
-              Slot-2
-            </button>
-            <button
-              class="w-50 btn btn-primary btn-lg"
-              onClick={() => navigate("/Roulette")}
-            >
-              Roulette
+              Delete Account
             </button>
           </div>
         </div>

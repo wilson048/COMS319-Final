@@ -181,8 +181,6 @@ function getRandom(top) {
 
 function Roulette() {
   function updateAccount(coins) {
-    let coinBet = document.getElementById("coinBet").value;
-
     console.log(accountDetails);
     fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
       method: "PUT",
@@ -191,7 +189,7 @@ function Roulette() {
         // _id: accountDetails._id, // also "id": req.body.id,
         password: accountDetails.password, // also "name": req.body.name,
         dob: accountDetails.dob, // also "price": req.body.price,
-        coins: accountDetails.coins + 0,
+        coins: accountDetails.coins + coins,
         credit_card_num: accountDetails.credit_card_num, // credit card information is not initally saved
         credit_card_name: accountDetails.credit_card_name,
         credit_card_zip: accountDetails.credit_card_zip,
@@ -204,11 +202,11 @@ function Roulette() {
         // accountDetails._id = updateThisAccount._id;
         // accountDetails.password = updateThisAccount.password;
         // accountDetails.dob = updateThisAccount.dob;
-        accountDetails.coins = accountDetails.coins + 0;
+        accountDetails.coins = accountDetails.coins + coins;
       });
   }
 
-  const [colorBet, setColorBet] = useState(-1);
+  const [colorBet, setBet] = useState("");
   const data = [
     { option: "0", style: { backgroundColor: "green", textColor: "white" } },
     { option: "1", style: { backgroundColor: "black", textColor: "white" } },
@@ -251,8 +249,9 @@ function Roulette() {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
 
-  const handleSpinClick = (num) => {
-    if (num == "" || num == null) {
+  const handleSpinClick = () => {
+    let num = document.getElementById("coinBet").value;
+    if (num === "" || num === null) {
       alert("Must fill in all fields (Coins)");
       return;
     }
@@ -266,10 +265,30 @@ function Roulette() {
       alert("Must put in positive integer");
       return;
     }
+
+    let coins = Number(num);
     if (!mustSpin) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
       setPrizeNumber(newPrizeNumber);
       setMustSpin(true);
+      // Green
+      if (colorBet === "Green" && newPrizeNumber === 0) {
+        coins *= 35;
+      }
+      // Black and Red
+      else if (
+        (colorBet === "Black" && newPrizeNumber % 2 === 1) ||
+        (colorBet === "Red" &&
+          newPrizeNumber % 2 === 0 &&
+          newPrizeNumber !== 0) ||
+        (colorBet === "1-14" && newPrizeNumber <= 14 && newPrizeNumber !== 0) ||
+        (colorBet === "15-28" && newPrizeNumber > 14)
+      ) {
+        // coins = coins;
+      } else {
+        coins = -coins;
+      }
+      updateAccount(coins);
     }
   };
   return (
@@ -294,6 +313,11 @@ function Roulette() {
           <button class="btn btn-secondary" onClick={handleSpinClick}>
             SPIN
           </button>
+          {colorBet !== "" && (
+            <h4 class="navbar-brand" href="#">
+              Placed bet on {colorBet}!
+            </h4>
+          )}
           <hr class="my-4"></hr>
           {/* <h4 class="mb-3">Log In</h4> */}
 
@@ -316,7 +340,7 @@ function Roulette() {
                 Bet Coins (Max {accountDetails.coins})
               </label>
               <input
-                type="password"
+                type="text"
                 class="form-control"
                 id="coinBet"
                 placeholder=""
@@ -329,7 +353,7 @@ function Roulette() {
                 class="w-50 btn btn-outline-secondary btn-lg"
                 data-bs-theme-value="dark"
                 onClick={() => {
-                  setColorBet(1);
+                  setBet("Black");
                 }}
               >
                 Black (x2)
@@ -337,7 +361,7 @@ function Roulette() {
               <button
                 class="w-50 btn btn-danger btn-lg"
                 onClick={() => {
-                  setColorBet(2);
+                  setBet("Red");
                 }}
               >
                 Red (x2)
@@ -345,10 +369,26 @@ function Roulette() {
               <button
                 class="w-50 btn btn-success btn-lg"
                 onClick={() => {
-                  setColorBet(0);
+                  setBet("Green");
                 }}
               >
-                Green (x10)
+                Green (x36)
+              </button>
+              <button
+                class="w-50 btn btn-secondary btn-lg"
+                onClick={() => {
+                  setBet("1-14");
+                }}
+              >
+                1-14 (x2)
+              </button>
+              <button
+                class="w-50 btn btn-warning btn-lg"
+                onClick={() => {
+                  setBet("15-28");
+                }}
+              >
+                15-28 (x2)
               </button>
             </div>
             {data.map((el) => {
