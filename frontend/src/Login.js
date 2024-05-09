@@ -234,12 +234,6 @@ function Login() {
             >
               Roulette
             </button>
-            <button
-              class="w-50 btn btn-primary btn-lg"
-              onClick={() => navigate("/Slots")}
-            >
-              slot Test
-            </button>
           </div>
         </div>
         {/* <button

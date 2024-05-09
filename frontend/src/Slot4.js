@@ -23,23 +23,30 @@ function Slot4() {
 
   // to trigger rolling and maintain state
   const roll = () => {
-    setRolling(true);
-    setTimeout(() => {
-      setRolling(false);
-    }, 700);
+    let coins = accountDetails.coins;
+    if (coins < 50) {
+      alert(
+        "Brosky you are too poor for this. Go more they are literally free"
+      );
+    } else {
+      setRolling(true);
+      setTimeout(() => {
+        setRolling(false);
+      }, 700);
 
-    // looping through all 3 slots to start rolling
-    const results = [];
-    slotRef.forEach((slot, i) => {
-      // this will trigger rolling effect
-      const selected = triggerSlotRotation(slot.current);
-      results[i] = selected;
-      if (i + 1 == 1) setFruit1(fruits[selected]);
-      else if (i + 1 == 2) setFruit2(fruits[selected]);
-      else if (i + 1 == 3) setFruit3(fruits[selected]);
-      else setFruit4(fruits[selected]);
-    });
-    PullLever(results);
+      // looping through all 3 slots to start rolling
+      const results = [];
+      slotRef.forEach((slot, i) => {
+        // this will trigger rolling effect
+        const selected = triggerSlotRotation(slot.current);
+        results[i] = selected;
+        if (i + 1 == 1) setFruit1(fruits[selected]);
+        else if (i + 1 == 2) setFruit2(fruits[selected]);
+        else if (i + 1 == 3) setFruit3(fruits[selected]);
+        else setFruit4(fruits[selected]);
+      });
+      PullLever(results);
+    }
   };
 
   // this will create a rolling effect and return random selected option
@@ -56,41 +63,34 @@ function Slot4() {
   };
 
   function PullLever(results) {
-    let coins = accountDetails.coins;
-    if (coins < 50) {
-      alert(
-        "Brosky you are too poor for this. Go more they are literally free"
-      );
-    } else {
-      coins = coins - 50;
-      let reward = RunSlot1(results);
-      coins = coins + reward;
-      fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          // _id: accountDetails._id, // also "id": req.body.id,
-          password: accountDetails.password, // also "name": req.body.name,
-          dob: accountDetails.dob, // also "price": req.body.price,
-          coins: coins, // all fresh accounts start with 500 coins
-          credit_card_num: accountDetails.credit_card_num, // credit card information is not initally saved
-          credit_card_name: accountDetails.credit_card_name,
-          credit_card_zip: accountDetails.credit_card_zip,
-          credit_card_cvv: accountDetails.credit_card_cvv,
-        }),
-      })
-        .then((response) => response.json())
-        .then((updateThisAccount) => {
-          // accountDetails._id = updateThisAccount._id;
-          // accountDetails.password = updateThisAccount.password;
-          // accountDetails.dob = updateThisAccount.dob;
-          accountDetails.coins = coins;
-          // accountDetails.credit_card_num = updateThisAccount.credit_card_num;
-          // accountDetails.credit_card_name = updateThisAccount.credit_card_name;
-          // accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
-          // accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
-        });
-    }
+    coins = coins - 50;
+    let reward = RunSlot1(results);
+    coins = coins + reward;
+    fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        // _id: accountDetails._id, // also "id": req.body.id,
+        password: accountDetails.password, // also "name": req.body.name,
+        dob: accountDetails.dob, // also "price": req.body.price,
+        coins: coins, // all fresh accounts start with 500 coins
+        credit_card_num: accountDetails.credit_card_num, // credit card information is not initally saved
+        credit_card_name: accountDetails.credit_card_name,
+        credit_card_zip: accountDetails.credit_card_zip,
+        credit_card_cvv: accountDetails.credit_card_cvv,
+      }),
+    })
+      .then((response) => response.json())
+      .then((updateThisAccount) => {
+        // accountDetails._id = updateThisAccount._id;
+        // accountDetails.password = updateThisAccount.password;
+        // accountDetails.dob = updateThisAccount.dob;
+        accountDetails.coins = coins;
+        // accountDetails.credit_card_num = updateThisAccount.credit_card_num;
+        // accountDetails.credit_card_name = updateThisAccount.credit_card_name;
+        // accountDetails.credit_card_zip = updateThisAccount.credit_card_zip;
+        // accountDetails.credit_card_cvv = updateThisAccount.credit_card_cvv;
+      });
   }
 
   /**
