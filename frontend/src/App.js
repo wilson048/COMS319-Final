@@ -5,6 +5,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import Authors from "./Authors";
 import Slot2 from "./Slot2";
+
 import accountDetails from "./SessionToken";
 
 import {
@@ -30,8 +31,9 @@ function App() {
     //   textColor: "white",
     // }}
     >
-      <nav
-        class="navbar navbar-expand navbar-dark bg-dark"
+      <div class="container"></div>
+      <div
+        class="navbar navbar-expand-lg navbar-dark bg-dark"
         aria-label="Second navbar example"
       >
         <img width="100px" height="50px" src="Flag.png"></img>
@@ -96,27 +98,36 @@ function App() {
             </Link>
           </div>
         </div>
-      </nav>
+      </div>
+      <div class="container-fluid">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/authors" element={<Authors />} />
+          <Route path="/Slot4" element={<Slot4 />} />
+          <Route path="/Slot2" element={<Slot2 />} />
+          <Route path="/Roulette" element={<Roulette />} />
+        </Routes>
+        {/* viewer === 1 && <Login></Login> */}
+        <footer
+          class="footer py-3 bg-body-tertiary"
+          style={{
+            position: "absolute",
+            left: "0",
+            bottom: "0",
+            right: "0",
+          }}
+        >
+          <div class="container">
+            <span class="text-body-secondary">
+              Website by Wilson Chu and Anton Kordick{" "}
+            </span>
 
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/authors" element={<Authors />} />
-        <Route path="/Slot4" element={<Slot4 />} />
-        <Route path="/Slot2" element={<Slot2 />} />
-        <Route path="/Roulette" element={<Roulette />} />
-      </Routes>
-      {/* viewer === 1 && <Login></Login> */}
-      <footer class="footer mt-auto py-3 bg-body-tertiary">
-        <div class="container">
-          <span class="text-body-secondary">
-            Website by Wilson Chu and Anton Kordick
-          </span>
-
-          <Link to="/Authors">Authors</Link>
-        </div>
-      </footer>
+            <Link to="/Authors">Authors</Link>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }

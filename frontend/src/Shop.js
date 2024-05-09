@@ -195,6 +195,13 @@ function Shop() {
   return (
     <div>
       <div class="container">
+        <hr class="my-4"></hr>
+        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+          <h4 class="navbar-brand" href="#">
+            Welcome Back, {accountDetails._id} Your balance is{" "}
+            {accountDetails.coins} {" Coins"}
+          </h4>
+        </div>
         <div class="col-md-7 col-lg-8">
           <hr class="my-4"></hr>
           <h4 class="mb-3">Add coins</h4>

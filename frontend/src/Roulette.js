@@ -180,6 +180,35 @@ function getRandom(top) {
 }
 
 function Roulette() {
+  function updateAccount(coins) {
+    let coinBet = document.getElementById("coinBet").value;
+
+    console.log(accountDetails);
+    fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        // _id: accountDetails._id, // also "id": req.body.id,
+        password: accountDetails.password, // also "name": req.body.name,
+        dob: accountDetails.dob, // also "price": req.body.price,
+        coins: accountDetails.coins + 0,
+        credit_card_num: accountDetails.credit_card_num, // credit card information is not initally saved
+        credit_card_name: accountDetails.credit_card_name,
+        credit_card_zip: accountDetails.credit_card_zip,
+        credit_card_cvv: accountDetails.credit_card_cvv,
+      }),
+    })
+      .then((response) => response.json())
+      .then((updateThisAccount) => {
+        // console.log(updateThisAccount);
+        // accountDetails._id = updateThisAccount._id;
+        // accountDetails.password = updateThisAccount.password;
+        // accountDetails.dob = updateThisAccount.dob;
+        accountDetails.coins = accountDetails.coins + 0;
+      });
+  }
+
+  const [colorBet, setColorBet] = useState(-1);
   const data = [
     { option: "0", style: { backgroundColor: "green", textColor: "white" } },
     { option: "1", style: { backgroundColor: "black", textColor: "white" } },
@@ -223,6 +252,20 @@ function Roulette() {
   const [prizeNumber, setPrizeNumber] = useState(0);
 
   const handleSpinClick = (num) => {
+    if (num == "" || num == null) {
+      alert("Must fill in all fields (Coins)");
+      return;
+    }
+
+    if (isNaN(num)) {
+      alert("Must put in integer values for numbers");
+      return;
+    }
+
+    if (Number(num) > accountDetails.coins || Number(num) < 0) {
+      alert("Must put in positive integer");
+      return;
+    }
     if (!mustSpin) {
       const newPrizeNumber = Math.floor(Math.random() * data.length);
       setPrizeNumber(newPrizeNumber);
@@ -231,13 +274,14 @@ function Roulette() {
   };
   return (
     <div>
-      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-        <h4 class="navbar-brand" href="#">
-          Welcome Back, {accountDetails._id} Your balance is{" "}
-          {accountDetails.coins} {" Coins"}
-        </h4>
-      </div>
       <div class="container">
+        <hr class="my-4"></hr>
+        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+          <h4 class="navbar-brand" href="#">
+            Welcome Back, {accountDetails._id} Your balance is{" "}
+            {accountDetails.coins} {" Coins"}
+          </h4>
+        </div>
         <div class="col-md-7 col-lg-8">
           <Wheel
             mustStartSpinning={mustSpin}
@@ -267,7 +311,6 @@ function Roulette() {
               ></input>
               <div class="invalid-feedback">Valid ID is required</div>
             </div> */}
-
             <div class="col-sm-6">
               <label for="coinBet" class="form-label">
                 Bet Coins (Max {accountDetails.coins})
@@ -281,6 +324,36 @@ function Roulette() {
               ></input>
               <div class="invalid-feedback">Valid Title is required.</div>
             </div>
+            <div class="col-sm-6">
+              <button
+                class="w-50 btn btn-outline-secondary btn-lg"
+                data-bs-theme-value="dark"
+                onClick={() => {
+                  setColorBet(1);
+                }}
+              >
+                Black (x2)
+              </button>
+              <button
+                class="w-50 btn btn-danger btn-lg"
+                onClick={() => {
+                  setColorBet(2);
+                }}
+              >
+                Red (x2)
+              </button>
+              <button
+                class="w-50 btn btn-success btn-lg"
+                onClick={() => {
+                  setColorBet(0);
+                }}
+              >
+                Green (x10)
+              </button>
+            </div>
+            {data.map((el) => {
+              <button id={el.option}>{el.option}</button>;
+            })}
           </div>
 
           {/* <hr class="my-4"></hr>
