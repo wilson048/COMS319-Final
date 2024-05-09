@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useStates, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.css";
 import accountDetails from "./SessionToken";
@@ -17,20 +17,7 @@ function Slots() {
   const [fruit3, setFruit3] = useState("🍒");
   const [rolling, setRolling] = useState(false);
   let slotRef = [useRef(null), useRef(null), useRef(null)];
-  const fruits = [
-    "🍒",
-    "🍉",
-    "🍊",
-    "🍓",
-    "🍇",
-    "🥝",
-    "🍋",
-    "🔔",
-    "🌽",
-    "💞",
-    "♠️",
-    "7️⃣",
-  ];
+  const fruits = ["🍒", "🍉", "🍊", "🍓", "🍇", "🥝"];
 
   // to trigger rolling and maintain state
   const roll = () => {

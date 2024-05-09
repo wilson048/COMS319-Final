@@ -5,6 +5,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import Authors from "./Authors";
 import Slot2 from "./Slot2";
+import Slots from "./Slots";
 import accountDetails from "./SessionToken";
 
 import {
