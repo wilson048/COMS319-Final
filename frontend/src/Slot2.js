@@ -21,26 +21,26 @@ function Slot2() {
 
   // to trigger rolling and maintain state
   const roll = () => {
+    setRolling(true);
+    setTimeout(() => {
+      setRolling(false);
+    }, 700);
+
+    // looping through all 3 slots to start rolling
+    const results = [];
+    slotRef.forEach((slot, i) => {
+      // this will trigger rolling effect
+      const selected = triggerSlotRotation(slot.current);
+      results[i] = selected;
+      if (i + 1 == 1) setFruit1(fruits[selected]);
+      else if (i + 1 == 2) setFruit2(fruits[selected]);
+    });
     let coins = accountDetails.coins;
-    if (coins < 50) {
+    if (coins < 2) {
       alert(
         "Brosky you are too poor for this. Go more they are literally free"
       );
     } else {
-      setRolling(true);
-      setTimeout(() => {
-        setRolling(false);
-      }, 700);
-
-      // looping through all 3 slots to start rolling
-      const results = [];
-      slotRef.forEach((slot, i) => {
-        // this will trigger rolling effect
-        const selected = triggerSlotRotation(slot.current);
-        results[i] = selected;
-        if (i + 1 == 1) setFruit1(fruits[selected]);
-        else if (i + 1 == 2) setFruit2(fruits[selected]);
-      });
       PullLever(results);
     }
   };

@@ -24,7 +24,7 @@ function Slot4() {
   // to trigger rolling and maintain state
   const roll = () => {
     let coins = accountDetails.coins;
-    if (coins < 50) {
+    if (coins < 5) {
       alert(
         "Brosky you are too poor for this. Go more they are literally free"
       );
