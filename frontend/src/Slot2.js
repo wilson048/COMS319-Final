@@ -13,12 +13,31 @@ import "./Slots.css";
 const { useRef, useState } = React;
 
 function Slot2() {
+  let multipler = 1;
   const [fruit1, setFruit1] = useState("🍒");
   const [fruit2, setFruit2] = useState("🍒");
   const [rolling, setRolling] = useState(false);
   let slotRef = [useRef(null), useRef(null)];
   const fruits = ["🍒", "🍋", "🍊", "🔔", "🍇", "🌽", "💞", "♠️", "🍉", "7️⃣"];
 
+  function upMultiplier() {
+    if (multipler == 64) {
+      alert("That's a bit too much buckroo");
+    } else {
+      multipler = multipler * 2;
+      document.getElementById("slot2button").textContent =
+        "Pull " + 2 * multipler + " coins";
+    }
+  }
+  function lowerMultiper() {
+    if (multipler == 1) {
+      alert("There are no free bets my friend");
+    } else {
+      multipler = multipler / 2;
+      document.getElementById("slot2button").textContent =
+        "Pull " + 2 * multipler + " coins";
+    }
+  }
   // to trigger rolling and maintain state
   const roll = () => {
     let coins = accountDetails.coins;
@@ -60,7 +79,7 @@ function Slot2() {
 
   function PullLever(results) {
     let coins = accountDetails.coins;
-    coins = coins - 2;
+    coins = coins - 2 * multipler;
     let reward = RunSlot1(results);
     coins = coins + reward;
     fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
@@ -170,14 +189,14 @@ function Slot2() {
    * @returns the amount earned
    */
   function Winner2(symbols) {
-    if (symbols[0] == "l" && symbols[1] == "l") return 10;
-    if (symbols[0] == "7" && symbols[1] == "7") return 50;
-    if (symbols[0] == "w" && symbols[1] == "w") return 35;
-    if (symbols[0] == "s" && symbols[1] == "s") return 25;
-    if (symbols[0] == "c" && symbols[1] == "c") return 15;
-    if (symbols[0] == symbols[1]) return 5;
-    if (symbols[1] == "h" || symbols[0] == "h") return 5;
-    if (symbols[1] == "g" || symbols[0] == "g") return 4;
+    if (symbols[0] == "l" && symbols[1] == "l") return 10 * multipler;
+    if (symbols[0] == "7" && symbols[1] == "7") return 50 * multipler;
+    if (symbols[0] == "w" && symbols[1] == "w") return 35 * multipler;
+    if (symbols[0] == "s" && symbols[1] == "s") return 25 * multipler;
+    if (symbols[0] == "c" && symbols[1] == "c") return 15 * multipler;
+    if (symbols[0] == symbols[1]) return 5 * multipler;
+    if (symbols[1] == "h" || symbols[0] == "h") return 5 * multipler;
+    if (symbols[1] == "g" || symbols[0] == "g") return 4 * multipler;
     return 0;
   }
 
@@ -221,12 +240,22 @@ function Slot2() {
         </section>
       </div>
       <div
+        id="slot2button"
         className={!rolling ? "roll rolling" : "roll"}
         onClick={!rolling && roll}
         disabled={rolling}
       >
-        {rolling ? "Rolling..." : "Pull 2 coins"}
+        {rolling ? "Rolling..." : "Pull " + 2 * multipler + " coins"}
       </div>
+      <button onClick={upMultiplier}>Double the Cost and reward</button>
+      <button onClick={lowerMultiper}>Half the risk and the reward</button>
+      {/* <div
+        className={!rolling ? "roll rolling" : "roll"}
+        onClick={!rolling && roll}
+        disabled={rolling}
+      >
+        {rolling ? "Rolling..." : "Pull 4 coins"}
+      </div> */}
     </div>
   );
 }

@@ -13,6 +13,7 @@ import "./Slots.css";
 const { useRef, useState } = React;
 
 function Slot4() {
+  let multipler = 1;
   const [fruit1, setFruit1] = useState("🍒");
   const [fruit2, setFruit2] = useState("🍒");
   const [fruit3, setFruit3] = useState("🍒");
@@ -20,6 +21,25 @@ function Slot4() {
   const [rolling, setRolling] = useState(false);
   let slotRef = [useRef(null), useRef(null), useRef(null), useRef(null)];
   const fruits = ["🍒", "🍋", "🍊", "🔔", "🍇", "🌽", "💞", "♠️", "🍉", "7️⃣"];
+
+  function upMultiplier() {
+    if (multipler == 64) {
+      alert("That's a bit too much buckroo");
+    } else {
+      multipler = multipler * 2;
+      document.getElementById("slot4button").textContent =
+        "Pull " + 5 * multipler + " coins";
+    }
+  }
+  function lowerMultipler() {
+    if (multipler == 1) {
+      alert("There are no free bets my friend");
+    } else {
+      multipler = multipler / 2;
+      document.getElementById("slot4button").textContent =
+        "Pull " + 5 * multipler + " coins";
+    }
+  }
 
   // to trigger rolling and maintain state
   const roll = () => {
@@ -64,7 +84,7 @@ function Slot4() {
 
   function PullLever(results) {
     let coins = accountDetails.coins;
-    coins = coins - 5;
+    coins = coins - 5 * multipler;
     let reward = RunSlot1(results);
     coins = coins + reward;
     fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
@@ -180,7 +200,7 @@ function Slot4() {
       symbols[0] == "7" &&
       symbols[3] == "7"
     ) {
-      return 20000;
+      return 20000 * multipler;
     }
     if (
       symbols[1] == "w" &&
@@ -188,7 +208,7 @@ function Slot4() {
       symbols[0] == "w" &&
       symbols[3] == "w"
     ) {
-      return 1000;
+      return 1000 * multipler;
     }
     if (
       symbols[1] == "e" &&
@@ -196,7 +216,7 @@ function Slot4() {
       symbols[0] == "e" &&
       symbols[3] == "e"
     ) {
-      return 150;
+      return 150 * multipler;
     }
     if (
       symbols[1] == "o" &&
@@ -204,7 +224,7 @@ function Slot4() {
       symbols[0] == "o" &&
       symbols[3] == "o"
     ) {
-      return 23;
+      return 23 * multipler;
     }
     if (
       symbols[1] == "s" &&
@@ -212,7 +232,7 @@ function Slot4() {
       symbols[0] == "s" &&
       symbols[3] == "s"
     ) {
-      return 2000;
+      return 2000 * multipler;
     }
     if (
       symbols[1] == "b" &&
@@ -220,7 +240,7 @@ function Slot4() {
       symbols[0] == "b" &&
       symbols[3] == "b"
     ) {
-      return 500;
+      return 500 * multipler;
     }
     if (
       symbols[1] == "e" &&
@@ -228,7 +248,7 @@ function Slot4() {
       symbols[0] == "e" &&
       symbols[3] == "b"
     ) {
-      return 150;
+      return 150 * multipler;
     }
     if (
       symbols[1] == "g" &&
@@ -236,7 +256,7 @@ function Slot4() {
       symbols[0] == "g" &&
       symbols[3] == "b"
     ) {
-      return 20;
+      return 20 * multipler;
     }
     if (
       symbols[1] == "o" &&
@@ -244,7 +264,7 @@ function Slot4() {
       symbols[0] == "o" &&
       symbols[3] == "b"
     ) {
-      return 20;
+      return 20 * multipler;
     }
     if (
       symbols[1] == "h" &&
@@ -252,7 +272,7 @@ function Slot4() {
       symbols[0] == "h" &&
       symbols[3] == "h"
     ) {
-      return 20;
+      return 20 * multipler;
     }
     if (
       symbols[1] == "g" &&
@@ -260,7 +280,7 @@ function Slot4() {
       symbols[0] == "g" &&
       symbols[3] == "g"
     ) {
-      return 26;
+      return 26 * multipler;
     }
     if (
       symbols[1] == "e" &&
@@ -268,7 +288,7 @@ function Slot4() {
       symbols[0] == "e" &&
       symbols[3] == "e"
     ) {
-      return 100;
+      return 100 * multipler;
     }
     if (
       symbols[1] == "c" &&
@@ -276,85 +296,85 @@ function Slot4() {
       symbols[0] == "c" &&
       symbols[3] == "c"
     ) {
-      return 2000;
+      return 2000 * multipler;
     }
     if (symbols[1] == "7" && symbols[2] == "7" && symbols[0] == "7") {
-      return 150;
+      return 150 * multipler;
     }
     if (symbols[1] == "w" && symbols[2] == "w" && symbols[0] == "w") {
-      return 150;
+      return 150 * multipler;
     }
     if (symbols[1] == "e" && symbols[2] == "b" && symbols[0] == "e") {
-      return 18;
+      return 18 * multipler;
     }
     if (symbols[1] == "g" && symbols[2] == "b" && symbols[0] == "g") {
-      return 14;
+      return 14 * multipler;
     }
     if (symbols[1] == "o" && symbols[2] == "b" && symbols[0] == "o") {
-      return 10;
+      return 10 * multipler;
     }
     if (symbols[1] == "o" && symbols[2] == "o" && symbols[0] == "o") {
-      return 10;
+      return 10 * multipler;
     }
     if (symbols[1] == "s" && symbols[2] == "s" && symbols[0] == "s") {
-      return 150;
+      return 150 * multipler;
     }
     if (symbols[1] == "d" && symbols[2] == "d" && symbols[0] == "d") {
-      return 20;
+      return 20 * multipler;
     }
     if (symbols[1] == "g" && symbols[2] == "g" && symbols[0] == "g") {
-      return 13;
+      return 13 * multipler;
     }
     if (symbols[1] == "e" && symbols[2] == "e" && symbols[0] == "e") {
-      return 18;
+      return 18 * multipler;
     }
     if (symbols[1] == "b" && symbols[2] == "b" && symbols[0] == "b") {
-      return 100;
+      return 100 * multipler;
     }
     if (symbols[1] == "c" && symbols[2] == "c" && symbols[0] == "c") {
-      return 100;
+      return 100 * multipler;
     }
     if (symbols[1] == "h" && symbols[2] == "h" && symbols[3] == "l") {
-      return 4;
+      return 4 * multipler;
     }
     if (symbols[1] == "h" && symbols[2] == "h" && symbols[3] == "e") {
-      return 4;
+      return 4 * multipler;
     }
     if (symbols[1] == "e" && symbols[2] == "e" && symbols[3] == "b") {
-      return 16;
+      return 16 * multipler;
     }
     if (symbols[1] == "e" && symbols[2] == "e" && symbols[3] == "e") {
-      return 16;
+      return 16 * multipler;
     }
     if (symbols[1] == "o" && symbols[2] == "o" && symbols[3] == "o") {
-      return 8;
+      return 8 * multipler;
     }
     if (symbols[1] == "o" && symbols[2] == "o" && symbols[3] == "b") {
-      return 8;
+      return 8 * multipler;
     }
     if (symbols[1] == "g" && symbols[2] == "g" && symbols[3] == "g") {
-      return 12;
+      return 12 * multipler;
     }
     if (symbols[1] == "g" && symbols[2] == "g" && symbols[3] == "b") {
-      return 12;
+      return 12 * multipler;
     }
     if (symbols[1] == "b" && symbols[2] == "b" && symbols[3] == "b") {
-      return 20;
+      return 20 * multipler;
     }
     if (symbols[1] == "h" && symbols[2] == "h" && symbols[0] == "h") {
-      return 11;
+      return 11 * multipler;
     }
     if (symbols[1] == "o" && symbols[2] == "o" && symbols[0] == "o") {
-      return 11;
+      return 11 * multipler;
     }
     if (symbols[0] == "h" && symbols[1] == "h") {
-      return 5;
+      return 5 * multipler;
     }
     if (symbols[1] == "h" && symbols[2] == "h") {
-      return 2;
+      return 2 * multipler;
     }
     if (symbols[0] == "h") {
-      return 2;
+      return 2 * multipler;
     }
     return 0;
   }
@@ -429,12 +449,15 @@ function Slot4() {
         </section>
       </div>
       <div
+        id="slot4button"
         className={!rolling ? "roll rolling" : "roll"}
         onClick={!rolling && roll}
         disabled={rolling}
       >
-        {rolling ? "Rolling..." : "Pull 5 coins"}
+        {rolling ? "Rolling..." : "Pull " + 5 * multipler + " coins"}
       </div>
+      <button onClick={upMultiplier}>Double the Cost and reward</button>
+      <button onClick={lowerMultipler}>Half the risk and the reward</button>
       <img src="winning chart.png"></img>
     </div>
   );
