@@ -40,8 +40,13 @@ function Slot2() {
   }
   // to trigger rolling and maintain state
   const roll = () => {
+    let user = accountDetails._id;
+    if (user == "" || user == null) {
+      alert("Bro Log in Already");
+      return;
+    }
     let coins = accountDetails.coins;
-    if (coins < 50) {
+    if (coins < 2 * multipler) {
       alert(
         "Brosky you are too poor for this. Go more they are literally free"
       );

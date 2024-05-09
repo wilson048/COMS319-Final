@@ -44,7 +44,12 @@ function Slot4() {
   // to trigger rolling and maintain state
   const roll = () => {
     let coins = accountDetails.coins;
-    if (coins < 50) {
+    let user = accountDetails._id;
+    if (user == "" || user == null) {
+      alert("Bro Log in Already");
+      return;
+    }
+    if (coins < 5 * multipler) {
       alert(
         "Brosky you are too poor for this. Go more they are literally free"
       );
