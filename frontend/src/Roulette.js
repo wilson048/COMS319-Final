@@ -231,6 +231,12 @@ function Roulette() {
   };
   return (
     <div>
+      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+        <h4 class="navbar-brand" href="#">
+          Welcome Back, {accountDetails._id} Your balance is{" "}
+          {accountDetails.coins} {" Coins"}
+        </h4>
+      </div>
       <div class="container">
         <div class="col-md-7 col-lg-8">
           <Wheel
@@ -260,21 +266,21 @@ function Roulette() {
                 required
               ></input>
               <div class="invalid-feedback">Valid ID is required</div>
-            </div>
+            </div> */}
 
             <div class="col-sm-6">
-              <label for="newPassword" class="form-label">
-                Password
+              <label for="coinBet" class="form-label">
+                Bet Coins (Max {accountDetails.coins})
               </label>
               <input
                 type="password"
                 class="form-control"
-                id="newPassword"
+                id="coinBet"
                 placeholder=""
                 required
               ></input>
               <div class="invalid-feedback">Valid Title is required.</div>
-            </div> */}
+            </div>
           </div>
 
           {/* <hr class="my-4"></hr>

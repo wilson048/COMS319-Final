@@ -155,21 +155,7 @@ function Login() {
   //       alert("Deleted Account!");
   //     });
   // }
-  const data = [
-    { option: "0", style: { backgroundColor: "green", textColor: "black" } },
-    { option: "1", style: { backgroundColor: "white" } },
-    { option: "2" },
-  ];
-  const [mustSpin, setMustSpin] = useState(false);
-  const [prizeNumber, setPrizeNumber] = useState(0);
 
-  const handleSpinClick = () => {
-    if (!mustSpin) {
-      const newPrizeNumber = Math.floor(Math.random() * data.length);
-      setPrizeNumber(newPrizeNumber);
-      setMustSpin(true);
-    }
-  };
   return (
     <div>
       <div class="container">
@@ -269,7 +255,7 @@ function Login() {
           Update Coins
         </button> */}
 
-        <footer class="footer mt-auto py-3 bg-body-tertiary">
+        {/* <footer class="footer mt-auto py-3 bg-body-tertiary">
           <div class="container">
             <span class="text-body-secondary">
               Website by Wilson Chu and Anton Kordick
@@ -280,7 +266,7 @@ function Login() {
               Authors
             </button>
           </div>
-        </footer>
+        </footer> */}
       </div>
     </div>
   );

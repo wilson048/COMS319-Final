@@ -94,5 +94,5 @@ function Slots() {
   );
 }
 
-ReactDOM.render(<Slots />, document.getElementById("react-root"));
+// ReactDOM.render(<Slots />, document.getElementById("react-root"));
 export default Slots;

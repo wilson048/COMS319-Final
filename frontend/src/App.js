@@ -13,7 +13,7 @@ import {
   Route,
   Routes,
   useNavigate,
-  Navigate,
+  Link,
 } from "react-router-dom";
 import Shop from "./Shop";
 import Slot4 from "./Slot4";
@@ -51,54 +51,50 @@ function App() {
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-
           <div class="collapse navbar-collapse" id="navbarsExample02">
-            {/* <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Link
-                </a>
-              </li>
-            </ul> */}
-
-            <button
-              type="button"
-              class="btn btn-primary"
-              onClick={navigate("/shop")}
-            >
-              Shop
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <button type="button" class="btn btn-primary">
-              4-Slots
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <button type="button" class="btn btn-primary">
-              2-Slots
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <button type="button" class="btn btn-primary">
-              Roulette
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarsExample02">
-            <button type="button" class="btn btn-primary">
+            {/* <button type="button" class="btn btn-primary">
               Sign-out
-            </button>
+            </button> */}
+            <Link to="/Roulette">Roulette</Link>
           </div>
-          <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            <h4 class="navbar-brand" href="#">
-              Welcome Back, {accountDetails._id} Your balance is{" "}
-              {accountDetails.coins} {" Coins"}
-            </h4>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            {/* <button type="button" class="btn btn-primary">
+              4-Slots
+            </button> */}
+            <Link to="/shop">Shop</Link>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            {/* <button type="button" class="btn btn-primary">
+              2-Slots
+            </button> */}
+            <Link to="/Slot4">4-Slots</Link>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            {/* <button type="button" class="btn btn-primary">
+              Roulette
+            </button> */}
+            <Link to="/Slot2">2-Slots</Link>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            {/* <button type="button" class="btn btn-primary">
+              Sign-out
+            </button> */}
+            <Link
+              to="/"
+              onClick={() => {
+                setViewer(0);
+                accountDetails._id = "";
+                accountDetails.password = "";
+                accountDetails.dob = "";
+                accountDetails.coins = 0;
+                accountDetails.credit_card_num = "";
+                accountDetails.credit_card_name = "";
+                accountDetails.credit_card_zip = "";
+                accountDetails.credit_card_cvv = "";
+              }}
+            >
+              Log Out
+            </Link>
           </div>
         </div>
       </nav>
@@ -119,20 +115,8 @@ function App() {
           <span class="text-body-secondary">
             Website by Wilson Chu and Anton Kordick
           </span>
-          <div></div>
-          {/* <Routes>
-            <Route
-              path="/"
-              element={
-                <button
-                  class="btn btn-secondary"
-                  onClick={navigate("/authors")}
-                >
-                  Authors
-                </button>
-              }
-            ></Route>
-          </Routes> */}
+
+          <Link to="/Authors">Authors</Link>
         </div>
       </footer>
     </div>
