@@ -83,16 +83,16 @@ function slot(slots) {
   return symbols;
 }
 /**
- * cherry:h
- * lemon:l
- * orange:o
- * bell:e
- * grape:g
- * corn:c
- * bar:b
- * spade:s
- * watermelon:w
- * 7:7
+ * cherry:h /
+ * lemon:l/
+ * orange:o /
+ * bell:e /
+ * grape:g /
+ * corn:c/
+ * bar:b/
+ * spade:s/
+ * watermelon:w /
+ * 7:7/
  *
  * This takes the numbers from slots and turns in into letters
  * @param {*} slots this is the number array of the results
