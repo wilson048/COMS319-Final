@@ -141,6 +141,12 @@ function Shop() {
     if (coinAmount === 0) {
       alert("Must add coins to cart");
     }
+    if (accountDetails._id === "" || accountDetails._id === null) {
+      alert(
+        "Alert Create an Account to start playing (Press Log Out to begin)"
+      );
+      return;
+    }
     console.log(accountDetails);
     fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
       method: "PUT",
