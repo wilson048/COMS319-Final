@@ -265,6 +265,12 @@ function Roulette() {
       alert("Must put in positive integer");
       return;
     }
+    if (accountDetails._id === "" || accountDetails._id === null) {
+      alert(
+        "Alert Create an Account to start playing (Press Log Out to begin)"
+      );
+      return;
+    }
 
     let coins = Number(num);
     if (!mustSpin) {
