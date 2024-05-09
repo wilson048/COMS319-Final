@@ -59,7 +59,8 @@ function Slot2() {
   };
 
   function PullLever(results) {
-    coins = coins - 20;
+    let coins = accountDetails.coins;
+    coins = coins - 2;
     let reward = RunSlot1(results);
     coins = coins + reward;
     fetch(`http://localhost:8081/updateAccount/${accountDetails._id}`, {
@@ -209,7 +210,7 @@ function Slot2() {
         onClick={!rolling && roll}
         disabled={rolling}
       >
-        {rolling ? "Rolling..." : "Pull 25 coins"}
+        {rolling ? "Rolling..." : "Pull 2 coins"}
       </div>
     </div>
   );
