@@ -113,6 +113,7 @@ function App() {
         <footer
           class="footer py-3 bg-body-tertiary"
           style={{
+            position: "absolute",
             left: "0",
             bottom: "0",
             right: "0",

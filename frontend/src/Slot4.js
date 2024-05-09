@@ -24,7 +24,7 @@ function Slot4() {
   // to trigger rolling and maintain state
   const roll = () => {
     let coins = accountDetails.coins;
-    if (coins < 5) {
+    if (coins < 50) {
       alert(
         "Brosky you are too poor for this. Go more they are literally free"
       );
@@ -353,7 +353,7 @@ function Slot4() {
     if (symbols[1] == "h" && symbols[2] == "h") {
       return 2;
     }
-    if ((symbols[0] = "h")) {
+    if (symbols[0] == "h") {
       return 2;
     }
     return 0;
@@ -361,9 +361,20 @@ function Slot4() {
 
   return (
     <div className="SlotMachine">
+      <hr class="my-4"></hr>
+      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+        <h4 class="navbar-brand" href="#">
+          Welcome Back, {accountDetails._id} Your balance is{" "}
+          {accountDetails.coins} {" Coins"}
+        </h4>
+      </div>
       <div className="slot">
         <section>
-          <div className="container" ref={slotRef[0]}>
+          <div
+            className="container"
+            style={{ position: "absolute" }}
+            ref={slotRef[0]}
+          >
             {fruits.map((fruit, i) => (
               <div key={i}>
                 <span>{fruit}</span>
@@ -374,7 +385,11 @@ function Slot4() {
       </div>
       <div className="slot">
         <section>
-          <div className="container" ref={slotRef[1]}>
+          <div
+            className="container"
+            style={{ position: "absolute" }}
+            ref={slotRef[1]}
+          >
             {fruits.map((fruit) => (
               <div>
                 <span>{fruit}</span>
@@ -385,7 +400,11 @@ function Slot4() {
       </div>
       <div className="slot">
         <section>
-          <div className="container" ref={slotRef[2]}>
+          <div
+            className="container"
+            style={{ position: "absolute" }}
+            ref={slotRef[2]}
+          >
             {fruits.map((fruit) => (
               <div>
                 <span>{fruit}</span>
@@ -396,7 +415,11 @@ function Slot4() {
       </div>
       <div className="slot">
         <section>
-          <div className="container" ref={slotRef[3]}>
+          <div
+            className="container"
+            style={{ position: "absolute" }}
+            ref={slotRef[3]}
+          >
             {fruits.map((fruit) => (
               <div>
                 <span>{fruit}</span>
@@ -412,6 +435,7 @@ function Slot4() {
       >
         {rolling ? "Rolling..." : "Pull 5 coins"}
       </div>
+      <img src="winning chart.png"></img>
     </div>
   );
 }

@@ -21,26 +21,26 @@ function Slot2() {
 
   // to trigger rolling and maintain state
   const roll = () => {
-    setRolling(true);
-    setTimeout(() => {
-      setRolling(false);
-    }, 700);
-
-    // looping through all 3 slots to start rolling
-    const results = [];
-    slotRef.forEach((slot, i) => {
-      // this will trigger rolling effect
-      const selected = triggerSlotRotation(slot.current);
-      results[i] = selected;
-      if (i + 1 == 1) setFruit1(fruits[selected]);
-      else if (i + 1 == 2) setFruit2(fruits[selected]);
-    });
     let coins = accountDetails.coins;
-    if (coins < 2) {
+    if (coins < 50) {
       alert(
         "Brosky you are too poor for this. Go more they are literally free"
       );
     } else {
+      setRolling(true);
+      setTimeout(() => {
+        setRolling(false);
+      }, 700);
+
+      // looping through all 3 slots to start rolling
+      const results = [];
+      slotRef.forEach((slot, i) => {
+        // this will trigger rolling effect
+        const selected = triggerSlotRotation(slot.current);
+        results[i] = selected;
+        if (i + 1 == 1) setFruit1(fruits[selected]);
+        else if (i + 1 == 2) setFruit2(fruits[selected]);
+      });
       PullLever(results);
     }
   };
@@ -170,22 +170,33 @@ function Slot2() {
    * @returns the amount earned
    */
   function Winner2(symbols) {
-    if (symbols[0] == "l" && symbols[1] == "l") return 0;
+    if (symbols[0] == "l" && symbols[1] == "l") return 10;
     if (symbols[0] == "7" && symbols[1] == "7") return 50;
     if (symbols[0] == "w" && symbols[1] == "w") return 35;
     if (symbols[0] == "s" && symbols[1] == "s") return 25;
     if (symbols[0] == "c" && symbols[1] == "c") return 15;
     if (symbols[0] == symbols[1]) return 5;
-    if (symbols[1] == "h" || symbols[0] == "h") return 3;
-    if (symbols[1] == "g" || symbols[0] == "g") return 2;
+    if (symbols[1] == "h" || symbols[0] == "h") return 5;
+    if (symbols[1] == "g" || symbols[0] == "g") return 4;
     return 0;
   }
 
   return (
     <div className="SlotMachine">
+      <hr class="my-4"></hr>
+      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
+        <h4 class="navbar-brand" href="#">
+          Welcome Back, {accountDetails._id} Your balance is{" "}
+          {accountDetails.coins} {" Coins"}
+        </h4>
+      </div>
       <div className="slot">
         <section>
-          <div className="container" ref={slotRef[0]}>
+          <div
+            className="container"
+            style={{ position: "absolute" }}
+            ref={slotRef[0]}
+          >
             {fruits.map((fruit, i) => (
               <div key={i}>
                 <span>{fruit}</span>
@@ -196,7 +207,11 @@ function Slot2() {
       </div>
       <div className="slot">
         <section>
-          <div className="container" ref={slotRef[1]}>
+          <div
+            className="container"
+            style={{ position: "absolute" }}
+            ref={slotRef[1]}
+          >
             {fruits.map((fruit) => (
               <div>
                 <span>{fruit}</span>
